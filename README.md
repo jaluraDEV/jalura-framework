@@ -1,8 +1,10 @@
 # Jalura Framework
 
-A modular, data-driven Godot 4 framework for 3D diorama action-adventures and platformers: third-person character controller, diorama camera rig, interactive world objects, inventory, quests, save system, and built-in level-design editor tools — cleanly decoupled from game-specific content.
+<p align="center">
+  <img src="docs/logo.png" alt="Jalura Framework" width="280">
+</p>
 
-![Jalura Framework](docs/logo.png)
+A modular, data-driven Godot 4 framework for 3D diorama action-adventures and platformers: third-person character controller, diorama camera rig, interactive world objects, inventory, quests, save system, and built-in level-design editor tools — cleanly decoupled from game-specific content.
 
 ## Core Principles
 
