@@ -1,0 +1,11 @@
+[gd_resource type="StandardMaterial3D" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/textures/terrain/wood_albedo.png" id="1_pxj38"]
+[ext_resource type="Texture2D" path="res://assets/textures/terrain/wood_normal.png" id="2_w0suw"]
+[ext_resource type="Texture2D" path="res://assets/textures/terrain/wood_rough.png" id="3_f4uha"]
+
+[resource]
+albedo_texture = ExtResource("1_pxj38")
+roughness_texture = ExtResource("3_f4uha")
+normal_enabled = true
+normal_texture = ExtResource("2_w0suw")

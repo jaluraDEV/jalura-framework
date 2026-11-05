@@ -1,0 +1,63 @@
+[gd_scene format=3 uid="uid://watertramp001"]
+
+[ext_resource type="Script" path="res://scripts/interaction/obj_bounce_pad.gd" id="1_bounce_root"]
+[ext_resource type="PackedScene" uid="uid://pbv6icgpq574" path="res://assets/umgebung/plattformen/wasser_trampolin.glb" id="2_mesh"]
+[ext_resource type="Script" path="res://scripts/interaction/behaviors/bounce_pad_behavior.gd" id="3_bounce_behavior"]
+[ext_resource type="Script" path="res://scripts/interaction/behaviors/object_feedback.gd" id="4_feedback"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_base"]
+height = 0.5
+radius = 1.0
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_trigger"]
+height = 0.45
+radius = 0.96
+
+[node name="ObjWaterTrampoline" type="Node3D"]
+script = ExtResource("1_bounce_root")
+bounce_velocity = 17.5
+allow_super_bounce = true
+super_bounce_velocity = 24.0
+water_bob_enabled = true
+water_bob_height = 0.07
+water_bob_speed = 2.0
+water_bob_tilt_deg = 4.5
+collision_mode = 0
+
+[node name="Visual" type="Node3D" parent="."]
+
+[node name="wasser_trampolin" parent="Visual" instance=ExtResource("2_mesh")]
+
+[node name="AutoStaticBody" type="StaticBody3D" parent="."]
+collision_layer = 1
+collision_mask = 1
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="AutoStaticBody"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.015, 0)
+shape = SubResource("CylinderShape3D_base")
+
+[node name="TriggerArea" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 3
+
+[node name="TriggerShape" type="CollisionShape3D" parent="TriggerArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.38, 0)
+shape = SubResource("CylinderShape3D_trigger")
+
+[node name="BouncePadBehavior" type="Node" parent="."]
+script = ExtResource("3_bounce_behavior")
+bounce_velocity = 17.5
+allow_super_bounce = true
+super_bounce_velocity = 24.0
+water_bob_enabled = true
+water_bob_height = 0.07
+water_bob_speed = 2.0
+water_bob_tilt_deg = 4.5
+trigger_area_path = NodePath("../TriggerArea")
+visual_node_path = NodePath("../Visual")
+
+[node name="ObjectFeedback" type="Node" parent="."]
+script = ExtResource("4_feedback")
+enable_focus_highlight = false
+enable_squash = false
+visual_node_path = NodePath("../Visual")

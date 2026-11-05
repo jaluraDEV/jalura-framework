@@ -1,0 +1,585 @@
+[gd_scene format=3 uid="uid://c6j27hpm8q1re"]
+
+[ext_resource type="Script" path="res://scripts/world/ship_cabin.gd" id="1_cabin_script"]
+[ext_resource type="LightmapGIData" uid="uid://qukae27oyv4l" path="res://scenes/demo/ship_cabin.lmbake" id="2_ibpeb"]
+[ext_resource type="PackedScene" path="res://assets/hauser/schiff/schiff_innen.glb" id="3_schiff_innen"]
+[ext_resource type="PackedScene" path="res://assets/hauser/schiff/moebel/bett.glb" id="4_bett"]
+[ext_resource type="PackedScene" path="res://scenes/player.tscn" id="5_player"]
+[ext_resource type="PackedScene" path="res://scenes/ui/hud.tscn" id="6_hud"]
+[ext_resource type="PackedScene" path="res://assets/hauser/schiff/moebel/steuerkonsole.glb" id="7_steuerkonsole"]
+[ext_resource type="PackedScene" path="res://assets/hauser/schiff/moebel/klo.glb" id="8_klo"]
+[ext_resource type="PackedScene" path="res://scenes/ui/pixel_filter.tscn" id="9_pixel_filter"]
+[ext_resource type="PackedScene" path="res://scenes/objects/door_trigger.tscn" id="10_door"]
+[ext_resource type="PackedScene" path="res://assets/hauser/schiff/moebel/klo_spuelung.glb" id="11_klo_spuelung"]
+[ext_resource type="Script" path="res://scripts/data/item_data.gd" id="12_6cfrw"]
+[ext_resource type="PackedScene" path="res://assets/hauser/schiff/moebel/spuele.glb" id="12_spuele"]
+[ext_resource type="Script" path="res://scripts/interaction/actions/give_item_action.gd" id="13_8kd7x"]
+[ext_resource type="PackedScene" path="res://assets/hauser/schiff/moebel/regal.glb" id="13_regal"]
+[ext_resource type="PackedScene" path="res://assets/hauser/schiff/moebel/grantel_plush.glb" id="14_grantel_plush"]
+[ext_resource type="PackedScene" path="res://assets/hauser/schiff/moebel/palme.glb" id="15_palme"]
+[ext_resource type="Script" path="res://scripts/interaction/actions/reaction_action.gd" id="16_ing6q"]
+[ext_resource type="Script" path="res://scripts/world/spawn_point.gd" id="16_spawn"]
+[ext_resource type="Script" path="res://scripts/interaction/obj_wobble.gd" id="18_obj_wobble"]
+[ext_resource type="Script" path="res://scripts/data/quest_condition.gd" id="18_u0b2r"]
+[ext_resource type="Script" path="res://scripts/interaction/obj_switch.gd" id="19_obj_switch"]
+[ext_resource type="Script" path="res://scripts/interaction/behaviors/readable_behavior.gd" id="20_readable"]
+[ext_resource type="Script" path="res://scripts/interaction/behaviors/wobble_behavior.gd" id="21_wobble"]
+[ext_resource type="Script" path="res://scripts/interaction/behaviors/switch_behavior.gd" id="22_switch"]
+[ext_resource type="Script" path="res://scripts/interaction/behaviors/object_feedback.gd" id="23_feedback"]
+[ext_resource type="Script" path="res://scripts/interaction/object_trigger.gd" id="24_trigger"]
+[ext_resource type="Script" path="res://scripts/interaction/actions/show_toast_action.gd" id="25_toast_action"]
+[ext_resource type="PackedScene" path="res://scenes/objects/obj_chest.tscn" id="26_chest"]
+[ext_resource type="Script" path="res://scripts/interaction/obj_readable.gd" id="27_obj_readable"]
+[ext_resource type="PackedScene" path="res://scenes/objects/pickable_item.tscn" id="28_flashlight_pickup"]
+[ext_resource type="Script" path="res://scripts/camera/diorama_camera_3d.gd" id="29_diorama_cam"]
+
+[sub_resource type="Environment" id="Environment_cabin"]
+background_mode = 1
+background_color = Color(0.015, 0.02, 0.035, 1)
+ambient_light_source = 2
+ambient_light_color = Color(0.12, 0.16, 0.24, 1)
+ambient_light_energy = 0.08
+tonemap_mode = 3
+tonemap_exposure = 1.05
+tonemap_white = 4.0
+ssr_enabled = true
+ssao_enabled = true
+ssao_radius = 1.8
+ssao_intensity = 3.5
+ssao_power = 1.4
+ssao_detail = 0.6
+ssil_enabled = true
+ssil_intensity = 2.8
+ssil_sharpness = 0.9
+glow_enabled = true
+glow_normalized = true
+glow_intensity = 0.75
+glow_bloom = 0.35
+glow_blend_mode = 0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_floor"]
+size = Vector3(5, 0.2, 4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ceiling"]
+size = Vector3(5, 0.2, 4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_back_wall"]
+size = Vector3(4.8, 3, 0.3)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_right_wall"]
+size = Vector3(0.3, 3, 3.8)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_left_wall_rear"]
+size = Vector3(0.3, 3, 2.1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_left_wall_front"]
+size = Vector3(0.3, 3, 0.65)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_left_wall_lintel"]
+size = Vector3(0.3, 0.8, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_front_barrier"]
+size = Vector3(4.8, 3, 0.2)
+
+[sub_resource type="Resource" id="Resource_y821a"]
+script = ExtResource("12_6cfrw")
+metadata/_custom_type_script = "uid://dubs16xesoi5i"
+
+[sub_resource type="Resource" id="Resource_o4y0v"]
+script = ExtResource("13_8kd7x")
+item = SubResource("Resource_y821a")
+item_id = "apple"
+metadata/_custom_type_script = "uid://jy02k1xsmmvy"
+
+[sub_resource type="Resource" id="Resource_4260c"]
+script = ExtResource("25_toast_action")
+text = "You found an apple in the bunk!"
+metadata/_custom_type_script = "uid://hog4iekqwwb5"
+
+[sub_resource type="Resource" id="Resource_nw2tk"]
+script = ExtResource("24_trigger")
+actions = Array[ExtResource("16_ing6q")]([SubResource("Resource_o4y0v"), SubResource("Resource_4260c")])
+metadata/_custom_type_script = "uid://bf7i6c5whodi4"
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_bed_col"]
+size = Vector3(1.3, 0.95, 1.8)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_helm_col"]
+size = Vector3(1.5, 1, 1.05)
+
+[sub_resource type="Resource" id="ShowToastAction_sink"]
+script = ExtResource("25_toast_action")
+badge = "💧"
+title = "SINK"
+text = "Rattle successful!"
+color = Color(0.3, 0.7, 1, 1)
+
+[sub_resource type="Resource" id="ObjectTrigger_sink"]
+script = ExtResource("24_trigger")
+trigger_id = "sink_wobble_toast"
+event = "wobbled"
+actions = Array[ExtResource("16_ing6q")]([SubResource("ShowToastAction_sink")])
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_sink_col"]
+size = Vector3(0.7, 1.4, 0.9)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_toilet_col"]
+size = Vector3(0.65, 0.65, 0.85)
+
+[sub_resource type="Resource" id="ShowToastAction_flush"]
+script = ExtResource("25_toast_action")
+badge = "🚽"
+title = "FLUSH"
+text = "*Whoosh!* Seawater gurgles powerfully through the pipes."
+color = Color(0.4, 0.8, 1, 1)
+
+[sub_resource type="Resource" id="ObjectTrigger_flush"]
+script = ExtResource("24_trigger")
+trigger_id = "toilet_flush_toast"
+event = "toggled"
+actions = Array[ExtResource("16_ing6q")]([SubResource("ShowToastAction_flush")])
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_shelf_col"]
+size = Vector3(0.3, 0.1, 1)
+
+[sub_resource type="Resource" id="ShowToastAction_plush"]
+script = ExtResource("25_toast_action")
+badge = "🧔"
+title = "PLUSH TOY"
+text = "Squeak! 'Hmph... hands off my beard!'"
+color = Color(1, 0.75, 0.3, 1)
+
+[sub_resource type="Resource" id="ObjectTrigger_plush"]
+script = ExtResource("24_trigger")
+trigger_id = "plush_wobble_toast"
+event = "wobbled"
+actions = Array[ExtResource("16_ing6q")]([SubResource("ShowToastAction_plush")])
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_threshold"]
+size = Vector3(1.0, 0.1, 1.2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_wallblocker"]
+size = Vector3(0.2, 2.4, 1.2)
+
+[node name="ShipCabin" type="Node3D" unique_id=1375441974]
+script = ExtResource("1_cabin_script")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1511671869]
+environment = SubResource("Environment_cabin")
+
+[node name="ExteriorLight" type="OmniLight3D" parent="WorldEnvironment" unique_id=233950279]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.510433, 0.481832, 2.72605)
+light_color = Color(0.600445, 0.857284, 1, 1)
+light_energy = 0.1
+light_bake_mode = 1
+
+[node name="LightmapGI" type="LightmapGI" parent="." unique_id=339368170]
+quality = 2
+bounces = 5
+bounce_indirect_energy = 2.0
+directional = true
+interior = true
+light_data = ExtResource("2_ibpeb")
+
+[node name="DioramaCamera" type="Camera3D" parent="." unique_id=192366342]
+transform = Transform3D(1, 0, 0, 0, 0.951057, 0.309017, 0, -0.309017, 0.951057, 0, 2.15, 4.35)
+current = true
+fov = 48.0
+script = ExtResource("29_diorama_cam")
+track_y = false
+track_z = false
+pan_influence = Vector3(0.32, 0, 0)
+smooth_speed = 5.0
+max_pan_left = 0.65
+max_pan_right = 0.65
+enable_yaw_swivel = false
+sync_with_global_fov = false
+
+[node name="schiff_innen" parent="." unique_id=565278172 instance=ExtResource("3_schiff_innen")]
+
+[node name="Collisions" type="StaticBody3D" parent="." unique_id=1831523045]
+collision_mask = 0
+
+[node name="Floor" type="CollisionShape3D" parent="Collisions" unique_id=785278013]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
+shape = SubResource("BoxShape3D_floor")
+
+[node name="Ceiling" type="CollisionShape3D" parent="Collisions" unique_id=1692878574]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.95, 0)
+shape = SubResource("BoxShape3D_ceiling")
+
+[node name="BackWall" type="CollisionShape3D" parent="Collisions" unique_id=1211801415]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, -1.9)
+shape = SubResource("BoxShape3D_back_wall")
+
+[node name="RightWall" type="CollisionShape3D" parent="Collisions" unique_id=1660792269]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.38, 1.4, 0)
+shape = SubResource("BoxShape3D_right_wall")
+
+[node name="LeftWallRear" type="CollisionShape3D" parent="Collisions" unique_id=1268475431]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.38, 1.4, -0.8)
+shape = SubResource("BoxShape3D_left_wall_rear")
+
+[node name="LeftWallFront" type="CollisionShape3D" parent="Collisions" unique_id=1968970328]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.38, 1.4, 1.5)
+shape = SubResource("BoxShape3D_left_wall_front")
+
+[node name="LeftWallLintel" type="CollisionShape3D" parent="Collisions" unique_id=1954351944]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.38, 2.55, 0.7)
+shape = SubResource("BoxShape3D_left_wall_lintel")
+
+[node name="FrontBarrier" type="CollisionShape3D" parent="Collisions" unique_id=1186703206]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, 1.88)
+shape = SubResource("BoxShape3D_front_barrier")
+
+[node name="Architecture" type="Node3D" parent="." unique_id=711638675]
+
+[node name="Window" type="Node3D" parent="Architecture" unique_id=346021043]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.85, 1.7, -1.76)
+
+[node name="Doorway" type="Node3D" parent="Architecture" unique_id=604389199]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.25, 0, 0.7)
+
+[node name="DoorExit" parent="Architecture/Doorway" unique_id=2124353253 instance=ExtResource("10_door")]
+is_exit_door = true
+zone_size = Vector3(1.2, 2.2, 1.2)
+target_scene_id = &"demo_level"
+target_scene_path = "res://scenes/demo/demo_level.tscn"
+target_spawn_id = &"von_bootskabine"
+return_spawn_position = Vector3(0.972, 2.98, 91.069)
+
+[node name="DoorstepBlocker" type="StaticBody3D" parent="Architecture/Doorway" unique_id=2124353254]
+
+[node name="FloorThresholdCol" type="CollisionShape3D" parent="Architecture/Doorway/DoorstepBlocker" unique_id=2124353255]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2, -0.05, 0)
+shape = SubResource("BoxShape3D_threshold")
+
+[node name="WallBlockerCol" type="CollisionShape3D" parent="Architecture/Doorway/DoorstepBlocker" unique_id=2124353256]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 1.1, 0)
+shape = SubResource("BoxShape3D_wallblocker")
+
+[node name="Lighting" type="Node3D" parent="." unique_id=1857121468]
+
+[node name="WindowDirectSun" type="SpotLight3D" parent="Lighting" unique_id=922368085]
+transform = Transform3D(0.866025, 0.17101, 0.469846, 0, 0.939693, -0.34202, -0.5, 0.296201, 0.813798, -0.85, 1.75, -2.15)
+light_color = Color(1, 0.93, 0.82, 1)
+light_energy = 9.5
+light_indirect_energy = 4.5
+light_bake_mode = 1
+shadow_enabled = true
+shadow_bias = 0.02
+shadow_blur = 2.0
+spot_range = 8.0
+spot_angle = 32.0
+
+[node name="WindowSkyScatterL" type="OmniLight3D" parent="Lighting" unique_id=1552244321]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.85, 1.7, -1.65)
+light_color = Color(0, 0.479977, 0.670307, 1)
+light_energy = 2.2
+light_indirect_energy = 3.5
+light_bake_mode = 1
+omni_range = 2.6
+omni_attenuation = 1.4
+
+[node name="WindowSunRight" type="SpotLight3D" parent="Lighting" unique_id=606704321]
+transform = Transform3D(0.965926, -0.0885213, -0.24321, 0, 0.939693, -0.34202, 0.258819, 0.330366, 0.907673, 0.85, 1.75, -2.15)
+light_color = Color(1, 0.93, 0.82, 1)
+light_energy = 7.0
+light_indirect_energy = 3.8
+light_bake_mode = 1
+shadow_enabled = true
+shadow_bias = 0.02
+shadow_blur = 2.0
+spot_range = 8.0
+spot_angle = 28.0
+
+[node name="WindowSkyScatterR" type="OmniLight3D" parent="Lighting" unique_id=315137486]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.85, 1.7, -1.65)
+light_color = Color(0.6, 0.85, 1, 1)
+light_energy = 1.8
+light_indirect_energy = 3.0
+light_bake_mode = 1
+omni_range = 2.6
+omni_attenuation = 1.4
+
+[node name="CeilingLantern" type="OmniLight3D" parent="Lighting" unique_id=580962325]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.1, -0.1)
+light_color = Color(1, 0.76, 0.42, 1)
+light_energy = 0.9
+light_indirect_energy = 1.5
+light_bake_mode = 1
+shadow_enabled = true
+shadow_bias = 0.02
+shadow_blur = 2.0
+omni_range = 3.8
+omni_attenuation = 1.2
+
+[node name="FrontSoftFill" type="OmniLight3D" parent="Lighting" unique_id=1961810027]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, 3.2)
+light_color = Color(0.18, 0.22, 0.32, 1)
+light_energy = 0.15
+light_bake_mode = 1
+omni_attenuation = 1.5
+
+[node name="CabinReflectionProbe" type="ReflectionProbe" parent="Lighting" unique_id=1792349987]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, 0)
+size = Vector3(4.8, 3, 4)
+box_projection = true
+interior = true
+
+
+[node name="SpawnPoint" type="Marker3D" parent="." unique_id=663678781]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.1, 0.05, 0.7)
+script = ExtResource("16_spawn")
+spawn_id = &"von_hafen"
+is_default = true
+
+[node name="Player" parent="." unique_id=1420898380 instance=ExtResource("5_player")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0.05, 0.8)
+camera_fade_enabled = false
+
+[node name="HUD" parent="." unique_id=665345260 instance=ExtResource("6_hud")]
+
+[node name="PixelFilter" parent="." unique_id=1206427106 instance=ExtResource("9_pixel_filter")]
+
+[node name="Obj_Bed" type="Node3D" parent="." unique_id=389054062]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.57531, 0, -0.825162)
+script = ExtResource("27_obj_readable")
+title = "Ship Bunk"
+lines = Array[String](["After a long day out at sea, this is the coziest place to sleep.", "The blanket smells of fresh sea air and dried seagrass."])
+prompt_text = "Inspect Bunk"
+object_id = "cabin_bed"
+triggers = Array[ExtResource("24_trigger")]([SubResource("Resource_nw2tk")])
+
+[node name="Visual" type="Node3D" parent="Obj_Bed" unique_id=931030626]
+
+[node name="bett" parent="Obj_Bed/Visual" unique_id=1445489122 instance=ExtResource("4_bett")]
+transform = Transform3D(1.785, 0, 0, 0, 1.785, 0, 0, 0, 1.785, 0, 0.427071, 0)
+
+[node name="BodyCollider" type="StaticBody3D" parent="Obj_Bed" unique_id=597756278]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.46, 0)
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Obj_Bed/BodyCollider" unique_id=465337689]
+shape = SubResource("BoxShape3D_bed_col")
+
+[node name="ReadableBehavior" type="Node" parent="Obj_Bed" unique_id=1642192447]
+script = ExtResource("20_readable")
+title = "Ship Bunk"
+lines = Array[String](["After a long day out at sea, this is the coziest place to sleep.", "The blanket smells of fresh sea air and dried seagrass."])
+prompt_text = "Inspect Bunk"
+
+[node name="ObjectFeedback" type="Node" parent="Obj_Bed" unique_id=1998268353]
+script = ExtResource("23_feedback")
+enable_focus_highlight = false
+
+[node name="Obj_Steuerkonsole" type="Node3D" parent="." unique_id=1878532146]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.077, 0, 1.5655)
+script = ExtResource("27_obj_readable")
+title = "Helm Console"
+lines = Array[String](["All ship systems are on standby.", "The cutter is safely anchored at the harbor pier."])
+prompt_text = "Check Console"
+object_id = "cabin_helm"
+
+[node name="Visual" type="Node3D" parent="Obj_Steuerkonsole" unique_id=913863949]
+
+[node name="steuerkonsole" parent="Obj_Steuerkonsole/Visual" unique_id=1334995210 instance=ExtResource("7_steuerkonsole")]
+transform = Transform3D(-1.47, 0, -2.21964e-07, 0, 1.47, 0, 2.21964e-07, 0, -1.47, 0, 0.611, 0)
+
+[node name="BodyCollider" type="StaticBody3D" parent="Obj_Steuerkonsole" unique_id=306211304]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.611, 0)
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Obj_Steuerkonsole/BodyCollider" unique_id=1586310673]
+shape = SubResource("BoxShape3D_helm_col")
+
+[node name="ReadableBehavior" type="Node" parent="Obj_Steuerkonsole" unique_id=8925664]
+script = ExtResource("20_readable")
+title = "Helm Console"
+lines = Array[String](["All ship systems are on standby.", "The cutter is safely anchored at the harbor pier."])
+prompt_text = "Check Console"
+
+[node name="ObjectFeedback" type="Node" parent="Obj_Steuerkonsole" unique_id=386191699]
+script = ExtResource("23_feedback")
+enable_focus_highlight = false
+
+[node name="Obj_Spuele" type="Node3D" parent="." unique_id=352778124]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.866, 0, 0.197)
+script = ExtResource("18_obj_wobble")
+wobble_angle = 0.0
+wobble_duration = 0.0
+wobble_on_contact = false
+enable_focus_highlight = true
+prompt_text = "Nudge Sink"
+object_id = "cabin_sink"
+triggers = Array[ExtResource("24_trigger")]([SubResource("ObjectTrigger_sink")])
+
+[node name="Visual" type="Node3D" parent="Obj_Spuele" unique_id=1543356917]
+
+[node name="spuele" parent="Obj_Spuele/Visual" unique_id=1587880614 instance=ExtResource("12_spuele")]
+transform = Transform3D(-0.0987054, 0, -1.41155, 0, 1.415, 0, 1.41155, 0, -0.0987054, 0, 0.711, 0)
+
+[node name="BodyCollider" type="StaticBody3D" parent="Obj_Spuele" unique_id=1826117523]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.711, 0)
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Obj_Spuele/BodyCollider" unique_id=947424769]
+shape = SubResource("BoxShape3D_sink_col")
+
+[node name="WobbleBehavior" type="Node" parent="Obj_Spuele" unique_id=972173512]
+script = ExtResource("21_wobble")
+wobble_angle = 0.0
+wobble_duration = 0.0
+wobble_on_contact = false
+prompt_text = "Nudge Sink"
+
+[node name="ObjectFeedback" type="Node" parent="Obj_Spuele" unique_id=488383045]
+script = ExtResource("23_feedback")
+enable_wobble = false
+
+[node name="Obj_Klo" type="Node3D" parent="." unique_id=1142525347]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.83539, 0, -1.22246)
+script = ExtResource("27_obj_readable")
+title = "Ship Toilet"
+lines = Array[String](["A trusty marine head.", "Always works as long as there is ocean water around."])
+prompt_text = "Inspect Toilet"
+object_id = "cabin_toilet"
+
+[node name="Visual" type="Node3D" parent="Obj_Klo" unique_id=952107128]
+
+[node name="klo" parent="Obj_Klo/Visual" unique_id=745771559 instance=ExtResource("8_klo")]
+transform = Transform3D(-3.75918e-08, 0, -0.86, 0, 0.86, 0, 0.86, 0, -3.75918e-08, 0, 0.539946, 0)
+
+[node name="BodyCollider" type="StaticBody3D" parent="Obj_Klo" unique_id=2087033672]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.54, 0)
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Obj_Klo/BodyCollider" unique_id=838216678]
+shape = SubResource("BoxShape3D_toilet_col")
+
+[node name="ReadableBehavior" type="Node" parent="Obj_Klo" unique_id=266255752]
+script = ExtResource("20_readable")
+title = "Ship Toilet"
+lines = Array[String](["A trusty marine head.", "Always works as long as there is ocean water around."])
+prompt_text = "Inspect Toilet"
+
+[node name="ObjectFeedback" type="Node" parent="Obj_Klo" unique_id=1476942395]
+script = ExtResource("23_feedback")
+enable_focus_highlight = false
+
+[node name="Obj_KloSpuelung" type="Node3D" parent="." unique_id=2016329614]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.83102, 1.10333, -1.7279)
+script = ExtResource("19_obj_switch")
+activate_prompt = "Pull Flush"
+deactivate_prompt = "Pull Flush"
+object_id = "cabin_flush"
+triggers = Array[ExtResource("24_trigger")]([SubResource("ObjectTrigger_flush")])
+
+[node name="Visual" type="Node3D" parent="Obj_KloSpuelung" unique_id=2092041868]
+
+[node name="klo_spuelung" parent="Obj_KloSpuelung/Visual" unique_id=411575575 instance=ExtResource("11_klo_spuelung")]
+transform = Transform3D(0.575, 0, 0, 0, 0.575, 0, 0, 0, 0.575, 0, 0, 0)
+
+[node name="SwitchBehavior" type="Node" parent="Obj_KloSpuelung" unique_id=1517813884]
+script = ExtResource("22_switch")
+activate_prompt = "Pull Flush"
+deactivate_prompt = "Pull Flush"
+
+[node name="ObjectFeedback" type="Node" parent="Obj_KloSpuelung" unique_id=1731401434]
+script = ExtResource("23_feedback")
+enable_focus_highlight = false
+
+[node name="Obj_Regal" type="Node3D" parent="." unique_id=429245069]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.059, 1.674, -0.55)
+script = ExtResource("27_obj_readable")
+title = "Cabin Shelf"
+lines = Array[String](["Stacked with old nautical charts, seashells, and spare lightbulbs.", "Right at the top sit little lucky charms."])
+prompt_text = "Inspect Shelf"
+object_id = "cabin_shelf"
+
+[node name="Visual" type="Node3D" parent="Obj_Regal" unique_id=887217113]
+
+[node name="regal" parent="Obj_Regal/Visual" unique_id=709816639 instance=ExtResource("13_regal")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
+
+[node name="BodyCollider" type="StaticBody3D" parent="Obj_Regal" unique_id=896006294]
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Obj_Regal/BodyCollider" unique_id=1374763464]
+shape = SubResource("BoxShape3D_shelf_col")
+
+[node name="ReadableBehavior" type="Node" parent="Obj_Regal" unique_id=601030356]
+script = ExtResource("20_readable")
+title = "Cabin Shelf"
+lines = Array[String](["Stacked with old nautical charts, seashells, and spare lightbulbs.", "Right at the top sit little lucky charms."])
+prompt_text = "Inspect Shelf"
+
+[node name="ObjectFeedback" type="Node" parent="Obj_Regal" unique_id=2118742827]
+script = ExtResource("23_feedback")
+enable_focus_highlight = false
+
+[node name="Obj_GrantelPlush" type="Node3D" parent="." unique_id=817500276]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.083, 1.856, -0.527)
+script = ExtResource("18_obj_wobble")
+wobble_angle = 18.0
+wobble_duration = 0.4
+wobble_on_contact = false
+prompt_text = "Squeeze Plush Toy"
+object_id = "cabin_plush"
+triggers = Array[ExtResource("24_trigger")]([SubResource("ObjectTrigger_plush")])
+
+[node name="Visual" type="Node3D" parent="Obj_GrantelPlush" unique_id=953348535]
+
+[node name="grantel_plush" parent="Obj_GrantelPlush/Visual" unique_id=1289895312 instance=ExtResource("14_grantel_plush")]
+transform = Transform3D(0.309787, 0, 0.211322, 0, 0.375, 0, -0.211322, 0, 0.309787, 0, 0, 0)
+
+[node name="WobbleBehavior" type="Node" parent="Obj_GrantelPlush" unique_id=266561225]
+script = ExtResource("21_wobble")
+wobble_angle = 18.0
+wobble_duration = 0.4
+wobble_on_contact = false
+prompt_text = "Squeeze Plush Toy"
+
+[node name="ObjectFeedback" type="Node" parent="Obj_GrantelPlush" unique_id=1689997469]
+script = ExtResource("23_feedback")
+enable_focus_highlight = false
+enable_wobble = false
+
+[node name="Obj_Palme" type="Node3D" parent="." unique_id=1086192292]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.077, 1.92261, -0.838)
+script = ExtResource("18_obj_wobble")
+wobble_angle = 16.0
+wobble_duration = 0.5
+wobble_on_contact = false
+prompt_text = "Nudge Palm"
+object_id = "cabin_palm"
+
+[node name="Visual" type="Node3D" parent="Obj_Palme" unique_id=2096644268]
+
+[node name="palme" parent="Obj_Palme/Visual" unique_id=812035881 instance=ExtResource("15_palme")]
+transform = Transform3D(0.53, 0, 0, 0, 0.53, 0, 0, 0, 0.53, 0, 0, 0)
+
+[node name="WobbleBehavior" type="Node" parent="Obj_Palme" unique_id=1952470195]
+script = ExtResource("21_wobble")
+wobble_angle = 16.0
+wobble_duration = 0.5
+wobble_on_contact = false
+prompt_text = "Nudge Palm"
+
+[node name="ObjectFeedback" type="Node" parent="Obj_Palme" unique_id=512777511]
+script = ExtResource("23_feedback")
+enable_focus_highlight = false
+enable_wobble = false
+
+[node name="Obj_CabinChest" parent="." unique_id=793906952 instance=ExtResource("26_chest")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 1.7, 0, 1.15)
+contents = Array[Dictionary]([{
+"amount": 1,
+"item_id": "battery"
+}])
+open_prompt = "Open Ship Chest"
+object_id = "cabin_chest"
+
+[node name="Obj_PickupFlashlight" parent="." unique_id=987123456 instance=ExtResource("28_flashlight_pickup")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.05, 1.76, -0.28)
+

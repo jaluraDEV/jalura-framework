@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="QuestData" format=3 uid="uid://clirxuoeh3df1"]
+
+[ext_resource type="Script" uid="uid://bg5pulod7pkcn" path="res://scripts/data/quest_objective.gd" id="1_5rsus"]
+[ext_resource type="Script" uid="uid://cb4p4cyk26ont" path="res://scripts/data/item_objective.gd" id="2_th3i5"]
+[ext_resource type="Script" uid="uid://btmb13i8xh5dj" path="res://scripts/data/quest_condition.gd" id="3_r6hg1"]
+[ext_resource type="Script" uid="uid://dua41rd176ld" path="res://scripts/data/quest_data.gd" id="4_162vx"]
+
+[sub_resource type="Resource" id="Resource_4uvc4"]
+script = ExtResource("2_th3i5")
+item_id = "coin"
+description = "Find 1 Coin"
+
+[resource]
+script = ExtResource("4_162vx")
+id = "demo_bring_coin"
+title = "A Coin for Mara"
+description = "Mara collects rare coins. Find one in the harbor and bring it to her."
+objectives = Array[ExtResource("1_5rsus")]([SubResource("Resource_4uvc4")])
+energy_reward = 5
+target_item_id = "coin"
+giver_npc_id = "mara"
+offer_dialogue = Array[String](["Ahoy! Great to see you.", "I collect rare coins. There is said to be a shiny one atop the high tower or out on the harbor island!", "Could you bring me one?"])
+reminder_dialogue = Array[String](["Did you find the coin yet? Check the top of the tower or bounce across the water trampolines!"])
+turn_in_dialogue = Array[String](["Wonderful! You found it! Thank you so much!"])
+after_dialogue = Array[String](["You are doing great. Be sure to check out the boat and its interior cabin at the harbor pier!"])

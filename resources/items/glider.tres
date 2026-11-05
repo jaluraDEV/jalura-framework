@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ItemData" format=3]
+
+[ext_resource type="PackedScene" path="res://assets/chars/extras/glider.glb" id="1_25gx1"]
+[ext_resource type="Script" path="res://scripts/data/item_data.gd" id="2_ft2df"]
+
+[resource]
+script = ExtResource("2_ft2df")
+id = "glider"
+name = "Glider"
+description = "Allows the player to glide through the air! Hold [Space] while airborne."
+model_scene = ExtResource("1_25gx1")
+category = 4
+max_stack = 1
+currency_attribute = ""
+can_drop = false

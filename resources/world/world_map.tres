@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="WorldMap" format=3 uid="uid://cwpgvqm2iufks"]
+
+[ext_resource type="Script" uid="uid://c0q8mr0jcpw36" path="res://scripts/data/world_map_entry.gd" id="1_gibln"]
+[ext_resource type="Script" uid="uid://nc8u2gv8yy8c" path="res://scripts/data/world_map.gd" id="2_nfd2s"]
+
+[sub_resource type="Resource" id="Resource_f0nxx"]
+script = ExtResource("1_gibln")
+scene_id = &"demo_level"
+display_name = "Jalura Demo Harbor"
+scene_path = "res://scenes/demo/demo_level.tscn"
+
+[sub_resource type="Resource" id="Resource_48ogg"]
+script = ExtResource("1_gibln")
+scene_id = &"bootskabine"
+display_name = "Ship Cabin"
+scene_path = "res://scenes/demo/ship_cabin.tscn"
+
+[resource]
+script = ExtResource("2_nfd2s")
+start_scene_id = &"demo_level"
+scenes = Array[ExtResource("1_gibln")]([SubResource("Resource_f0nxx"), SubResource("Resource_48ogg")])

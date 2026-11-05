@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://objexitzone001"]
+
+[ext_resource type="Script" path="res://scripts/interaction/obj_exit.gd" id="1_exit"]
+[ext_resource type="Script" path="res://scripts/interaction/behaviors/transition_behavior.gd" id="2_trans"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_zone"]
+size = Vector3(2.5, 2, 1.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_debug"]
+transparency = 1
+albedo_color = Color(0.1, 0.75, 1, 0.22)
+roughness = 0.5
+
+[sub_resource type="BoxMesh" id="BoxMesh_debug"]
+material = SubResource("StandardMaterial3D_debug")
+size = Vector3(2.5, 2, 1.5)
+
+[node name="ObjExitZone" type="Node3D"]
+script = ExtResource("1_exit")
+transition_mode = 1
+collision_mode = 0
+
+[node name="TriggerArea" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TriggerArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("BoxShape3D_zone")
+
+[node name="ZoneDebugMesh" type="MeshInstance3D" parent="TriggerArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("BoxMesh_debug")
+
+[node name="TransitionBehavior" type="Node" parent="."]
+script = ExtResource("2_trans")
+transition_mode = 1

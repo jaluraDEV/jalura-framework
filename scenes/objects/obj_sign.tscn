@@ -1,0 +1,40 @@
+[gd_scene format=3 uid="uid://diqy7msmqmglx"]
+
+[ext_resource type="Script" path="res://scripts/interaction/obj_sign.gd" id="1_sign"]
+[ext_resource type="Script" uid="uid://b82e36fyoq6fl" path="res://scripts/interaction/behaviors/readable_behavior.gd" id="2_readable"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wood"]
+albedo_color = Color(0.48, 0.35, 0.22, 1)
+roughness = 0.85
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_post"]
+material = SubResource("StandardMaterial3D_wood")
+top_radius = 0.05
+bottom_radius = 0.06
+height = 1.2
+
+[sub_resource type="BoxMesh" id="BoxMesh_board"]
+material = SubResource("StandardMaterial3D_wood")
+size = Vector3(0.8, 0.35, 0.06)
+
+[node name="ObjSign" type="Node3D" unique_id=267407850]
+script = ExtResource("1_sign")
+object_id = ""
+collision_mode = 1
+title = "Harbor Signpost"
+lines = Array[String](["Welcome to the Harbor", "Explore the framework features!", "Have fun testing!"])
+prompt_text = "Lesen"
+
+[node name="SignPost" type="MeshInstance3D" parent="." unique_id=1630753228]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
+mesh = SubResource("CylinderMesh_post")
+
+[node name="SignBoard" type="MeshInstance3D" parent="." unique_id=138551237]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.05, 0)
+mesh = SubResource("BoxMesh_board")
+
+[node name="ReadableBehavior" type="Node" parent="." unique_id=969589341]
+script = ExtResource("2_readable")
+title = "Harbor Signpost"
+lines = Array[String](["Welcome to the Harbor", "Explore the framework features!", "Have fun testing!"])
+prompt_text = "Lesen"

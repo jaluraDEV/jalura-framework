@@ -1,0 +1,664 @@
+[gd_scene format=3 uid="uid://dpov271n8j4hm"]
+
+[ext_resource type="Script" path="res://scripts/ui/inventory_menu.gd" id="1_inv"]
+[ext_resource type="Theme" path="res://assets/ui/jalura_theme.tres" id="2_theme"]
+[ext_resource type="Shader" path="res://assets/shader/ui_blur.gdshader" id="3_blur"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_blur"]
+shader = ExtResource("3_blur")
+shader_parameter/blur_amount = 2.8
+shader_parameter/tint_color = Color(0.04, 0.05, 0.07, 0.55)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_glass_panel"]
+bg_color = Color(0.11, 0.10, 0.09, 0.95)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.72, 0.58, 0.38, 0.8)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+shadow_color = Color(0, 0, 0, 0.8)
+shadow_size = 32
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_close_btn_n"]
+content_margin_left = 8.0
+content_margin_top = 4.0
+content_margin_right = 8.0
+content_margin_bottom = 4.0
+bg_color = Color(0.20, 0.18, 0.16, 0.85)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.72, 0.62, 0.46, 0.5)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_close_btn_h"]
+content_margin_left = 8.0
+content_margin_top = 4.0
+content_margin_right = 8.0
+content_margin_bottom = 4.0
+bg_color = Color(0.50, 0.15, 0.15, 0.95)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.95, 0.4, 0.4, 0.7)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tab_active"]
+content_margin_left = 18.0
+content_margin_top = 8.0
+content_margin_right = 18.0
+content_margin_bottom = 8.0
+bg_color = Color(0.24, 0.21, 0.18, 0.98)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 0
+border_color = Color(0.95, 0.82, 0.45, 0.95)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tab_inactive"]
+content_margin_left = 18.0
+content_margin_top = 8.0
+content_margin_right = 18.0
+content_margin_bottom = 8.0
+bg_color = Color(0.14, 0.13, 0.12, 0.8)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 0
+border_color = Color(0.65, 0.55, 0.4, 0.5)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tab_hover"]
+content_margin_left = 18.0
+content_margin_top = 8.0
+content_margin_right = 18.0
+content_margin_bottom = 8.0
+bg_color = Color(0.20, 0.18, 0.15, 0.9)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 0
+border_color = Color(0.85, 0.74, 0.52, 0.8)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_filter_active"]
+content_margin_left = 12.0
+content_margin_top = 6.0
+content_margin_right = 12.0
+content_margin_bottom = 6.0
+bg_color = Color(0.32, 0.26, 0.18, 0.95)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.95, 0.82, 0.45, 0.9)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_filter_inactive"]
+content_margin_left = 12.0
+content_margin_top = 6.0
+content_margin_right = 12.0
+content_margin_bottom = 6.0
+bg_color = Color(0.14, 0.13, 0.12, 0.85)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.55, 0.48, 0.38, 0.5)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_detail_card"]
+bg_color = Color(0.13, 0.12, 0.11, 0.94)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.78, 0.66, 0.48, 0.8)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+shadow_color = Color(0, 0, 0, 0.6)
+shadow_size = 14
+
+[sub_resource type="Environment" id="Environment_preview"]
+background_mode = 1
+background_color = Color(0, 0, 0, 0)
+ambient_light_source = 2
+ambient_light_color = Color(0.7, 0.72, 0.78, 1)
+ambient_light_energy = 0.9
+
+[node name="InventoryMenu" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_theme")
+script = ExtResource("1_inv")
+
+[node name="Backdrop" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_blur")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="CenterContainer"]
+custom_minimum_size = Vector2(900, 600)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_glass_panel")
+
+[node name="FolderBg" type="TextureRect" parent="CenterContainer/PanelContainer"]
+layout_mode = 2
+expand_mode = 1
+stretch_mode = 0
+modulate = Color(0.9, 0.88, 0.85, 0.28)
+
+[node name="MarginContainer" type="MarginContainer" parent="CenterContainer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="HeaderBar" type="HBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="HeaderLeftSpacer" type="Control" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/HeaderBar"]
+custom_minimum_size = Vector2(32, 0)
+layout_mode = 2
+
+[node name="TitleLabel" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/HeaderBar"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.96, 0.94, 0.88, 1)
+theme_override_font_sizes/font_size = 20
+text = "Q U E S T S   &   I N V E N T O R Y"
+horizontal_alignment = 1
+
+[node name="CloseButton" type="Button" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/HeaderBar"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = SubResource("StyleBoxFlat_close_btn_n")
+theme_override_styles/hover = SubResource("StyleBoxFlat_close_btn_h")
+text = "✕"
+
+[node name="TabBarContainer" type="HBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="CasesTabButton" type="Button" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/TabBarContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+focus_mode = 0
+theme_override_colors/font_color = Color(0.96, 0.94, 0.88, 1)
+theme_override_font_sizes/font_size = 15
+theme_override_styles/normal = SubResource("StyleBoxFlat_tab_active")
+theme_override_styles/hover = SubResource("StyleBoxFlat_tab_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_tab_active")
+text = "📋  ACTIVE QUESTS / LOG  [Q]"
+
+[node name="EvidenceTabButton" type="Button" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/TabBarContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+focus_mode = 0
+theme_override_colors/font_color = Color(0.85, 0.78, 0.65, 0.85)
+theme_override_font_sizes/font_size = 15
+theme_override_styles/normal = SubResource("StyleBoxFlat_tab_inactive")
+theme_override_styles/hover = SubResource("StyleBoxFlat_tab_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_tab_active")
+text = "💼  ITEMS & INVENTORY  [I]"
+
+[node name="TabSpacer" type="Control" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/TabBarContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HSeparator" type="HSeparator" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="CasesView" type="HBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 20
+
+[node name="CasesLeftBox" type="VBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/CasesView"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 10
+
+[node name="CasesFilterRow" type="HBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/CasesView/CasesLeftBox"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="FilterActiveBtn" type="Button" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/CasesView/CasesLeftBox/CasesFilterRow"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 0
+theme_override_colors/font_color = Color(0.96, 0.94, 0.88, 1)
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = SubResource("StyleBoxFlat_filter_active")
+theme_override_styles/hover = SubResource("StyleBoxFlat_filter_active")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_filter_active")
+text = "▶ Active Quests (0)"
+
+[node name="FilterCompletedBtn" type="Button" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/CasesView/CasesLeftBox/CasesFilterRow"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 0
+theme_override_colors/font_color = Color(0.75, 0.70, 0.60, 0.85)
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = SubResource("StyleBoxFlat_filter_inactive")
+theme_override_styles/hover = SubResource("StyleBoxFlat_filter_active")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_filter_active")
+text = "✓ Completed Quests (0)"
+
+[node name="CasesScroll" type="ScrollContainer" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/CasesView/CasesLeftBox"]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="CasesListVBox" type="VBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/CasesView/CasesLeftBox/CasesScroll"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 8
+
+[node name="CasesEmptyLabel" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/CasesView/CasesLeftBox"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.75, 0.70, 0.60, 0.8)
+theme_override_font_sizes/font_size = 15
+text = "No active quests in this log."
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="CasesRightCard" type="PanelContainer" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/CasesView"]
+custom_minimum_size = Vector2(360, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_detail_card")
+
+[node name="Margin" type="MarginContainer" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/CasesView/CasesRightCard"]
+layout_mode = 2
+theme_override_constants/margin_left = 18
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 18
+theme_override_constants/margin_bottom = 16
+
+[node name="CaseDetailVBox" type="VBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/CasesView/CasesRightCard/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="CaseDetailTitle" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/CasesView/CasesRightCard/Margin/CaseDetailVBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.96, 0.85, 0.35, 1)
+theme_override_font_sizes/font_size = 18
+text = "Select Quest"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="CaseDetailCategory" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/CasesView/CasesRightCard/Margin/CaseDetailVBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.85, 0.65, 0.40, 0.9)
+theme_override_font_sizes/font_size = 12
+text = "[ QUEST LOG ]"
+horizontal_alignment = 1
+
+[node name="CaseDeco" type="TextureRect" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/CasesView/CasesRightCard/Margin/CaseDetailVBox"]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+expand_mode = 1
+stretch_mode = 5
+modulate = Color(0.85, 0.75, 0.55, 0.7)
+
+[node name="CaseStatusBadge" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/CasesView/CasesRightCard/Margin/CaseDetailVBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.95, 0.88, 0.65, 1)
+theme_override_font_sizes/font_size = 13
+text = "[ STATUS: IN PROGRESS ]"
+horizontal_alignment = 1
+
+[node name="HSeparatorCase1" type="HSeparator" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/CasesView/CasesRightCard/Margin/CaseDetailVBox"]
+layout_mode = 2
+
+[node name="CaseDetailDesc" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/CasesView/CasesRightCard/Margin/CaseDetailVBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.92, 0.90, 0.85, 1)
+theme_override_font_sizes/font_size = 14
+text = "Select a quest on the left to view objectives and details."
+autowrap_mode = 2
+
+[node name="HSeparatorCase2" type="HSeparator" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/CasesView/CasesRightCard/Margin/CaseDetailVBox"]
+layout_mode = 2
+
+[node name="ObjectivesHeader" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/CasesView/CasesRightCard/Margin/CaseDetailVBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.85, 0.74, 0.52, 0.9)
+theme_override_font_sizes/font_size = 13
+text = "OBJECTIVES:"
+
+[node name="ObjectivesScroll" type="ScrollContainer" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/CasesView/CasesRightCard/Margin/CaseDetailVBox"]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="ObjectivesVBox" type="VBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/CasesView/CasesRightCard/Margin/CaseDetailVBox/ObjectivesScroll"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 6
+
+[node name="CaseTurnInHint" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/CasesView/CasesRightCard/Margin/CaseDetailVBox"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+theme_override_colors/font_color = Color(0.4, 0.95, 0.5, 1)
+theme_override_font_sizes/font_size = 13
+text = "➔ READY! Talk to the quest giver to complete."
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="HSeparatorCase3" type="HSeparator" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/CasesView/CasesRightCard/Margin/CaseDetailVBox"]
+layout_mode = 2
+
+[node name="CaseRewardsLabel" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/CasesView/CasesRightCard/Margin/CaseDetailVBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.95, 0.82, 0.35, 1)
+theme_override_font_sizes/font_size = 13
+text = "REWARD: -"
+horizontal_alignment = 1
+
+[node name="CaseClosedStamp" type="TextureRect" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/CasesView/CasesRightCard"]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(220, 110)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
+modulate = Color(1, 1, 1, 0.88)
+
+[node name="EvidenceView" type="HBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 20
+
+[node name="LeftBox" type="VBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/EvidenceView"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 8
+
+[node name="TitleRow" type="HBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/EvidenceView/LeftBox"]
+layout_mode = 2
+
+[node name="RucksackLabel" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/EvidenceView/LeftBox/TitleRow"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.85, 0.74, 0.52, 0.9)
+theme_override_font_sizes/font_size = 14
+text = "I T E M   L I S T"
+
+[node name="CapacityLabel" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/EvidenceView/LeftBox/TitleRow"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.85, 0.74, 0.52, 0.9)
+theme_override_font_sizes/font_size = 14
+text = "0 / 16 Items"
+horizontal_alignment = 2
+
+[node name="EvidenceFilterRow" type="HBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/EvidenceView/LeftBox"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="FilterEvidenceBtn" type="Button" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/EvidenceView/LeftBox/EvidenceFilterRow"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 0
+theme_override_colors/font_color = Color(0.96, 0.94, 0.88, 1)
+theme_override_font_sizes/font_size = 13
+theme_override_styles/normal = SubResource("StyleBoxFlat_filter_active")
+theme_override_styles/hover = SubResource("StyleBoxFlat_filter_active")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_filter_active")
+text = "🔍 Items (0)"
+
+[node name="FilterToolsBtn" type="Button" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/EvidenceView/LeftBox/EvidenceFilterRow"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 0
+theme_override_colors/font_color = Color(0.75, 0.70, 0.60, 0.85)
+theme_override_font_sizes/font_size = 13
+theme_override_styles/normal = SubResource("StyleBoxFlat_filter_inactive")
+theme_override_styles/hover = SubResource("StyleBoxFlat_filter_active")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_filter_active")
+text = "⚙️ Equipment (0)"
+
+[node name="FilterAllBtn" type="Button" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/EvidenceView/LeftBox/EvidenceFilterRow"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 0
+theme_override_colors/font_color = Color(0.75, 0.70, 0.60, 0.85)
+theme_override_font_sizes/font_size = 13
+theme_override_styles/normal = SubResource("StyleBoxFlat_filter_inactive")
+theme_override_styles/hover = SubResource("StyleBoxFlat_filter_active")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_filter_active")
+text = "📦 All (0)"
+
+[node name="CurrencyBar" type="HBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/EvidenceView/LeftBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="ScrollContainer" type="ScrollContainer" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/EvidenceView/LeftBox"]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="SlotsGrid" type="GridContainer" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/EvidenceView/LeftBox/ScrollContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/h_separation = 8
+theme_override_constants/v_separation = 8
+columns = 4
+
+[node name="RightCard" type="PanelContainer" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/EvidenceView"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_detail_card")
+
+[node name="Margin" type="MarginContainer" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/EvidenceView/RightCard"]
+layout_mode = 2
+theme_override_constants/margin_left = 18
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 18
+theme_override_constants/margin_bottom = 16
+
+[node name="DetailVBox" type="VBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/EvidenceView/RightCard/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="PolaroidBox" type="PanelContainer" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/EvidenceView/RightCard/Margin/DetailVBox"]
+clip_contents = true
+custom_minimum_size = Vector2(200, 230)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="PhotoBacking" type="ColorRect" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/EvidenceView/RightCard/Margin/DetailVBox/PolaroidBox"]
+layout_mode = 2
+color = Color(0.08, 0.08, 0.09, 0.95)
+
+[node name="PreviewContainer" type="SubViewportContainer" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/EvidenceView/RightCard/Margin/DetailVBox/PolaroidBox"]
+unique_name_in_owner = true
+layout_mode = 2
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/EvidenceView/RightCard/Margin/DetailVBox/PolaroidBox/PreviewContainer"]
+own_world_3d = true
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(200, 230)
+render_target_update_mode = 3
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/EvidenceView/RightCard/Margin/DetailVBox/PolaroidBox/PreviewContainer/SubViewport"]
+environment = SubResource("Environment_preview")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/EvidenceView/RightCard/Margin/DetailVBox/PolaroidBox/PreviewContainer/SubViewport"]
+transform = Transform3D(0.707107, -0.408248, 0.57735, 0, 0.816497, 0.57735, -0.707107, -0.408248, 0.57735, 0, 2, 0)
+light_color = Color(1, 0.98, 0.92, 1)
+light_energy = 1.4
+
+[node name="DirectionalLight3D_Fill" type="DirectionalLight3D" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/EvidenceView/RightCard/Margin/DetailVBox/PolaroidBox/PreviewContainer/SubViewport"]
+transform = Transform3D(-0.707107, 0.408248, -0.57735, 0, 0.816497, 0.57735, 0.707107, 0.408248, -0.57735, 0, 1, 0)
+light_color = Color(0.65, 0.8, 1, 1)
+light_energy = 0.7
+
+[node name="Camera3D" type="Camera3D" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/EvidenceView/RightCard/Margin/DetailVBox/PolaroidBox/PreviewContainer/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 0.990268, 0.139173, 0, -0.139173, 0.990268, 0, 0.1, 0.7)
+fov = 36.0
+
+[node name="ItemPreviewPivot" type="Node3D" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/EvidenceView/RightCard/Margin/DetailVBox/PolaroidBox/PreviewContainer/SubViewport"]
+unique_name_in_owner = true
+
+[node name="NoModelLabel" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/EvidenceView/RightCard/Margin/DetailVBox/PolaroidBox/PreviewContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.75, 0.72, 0.65, 0.85)
+theme_override_font_sizes/font_size = 14
+text = "[ ? ]
+Keine 3D-Aufnahme"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PolaroidOverlay" type="TextureRect" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/EvidenceView/RightCard/Margin/DetailVBox/PolaroidBox"]
+layout_mode = 2
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 0
+
+[node name="DetailTitle" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/EvidenceView/RightCard/Margin/DetailVBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.96, 0.85, 0.35, 1)
+theme_override_font_sizes/font_size = 18
+text = "Select Item"
+horizontal_alignment = 1
+
+[node name="DetailCategory" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/EvidenceView/RightCard/Margin/DetailVBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.85, 0.65, 0.40, 0.9)
+theme_override_font_sizes/font_size = 12
+text = "ITEM DETAILS"
+horizontal_alignment = 1
+
+[node name="HSeparator2" type="HSeparator" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/EvidenceView/RightCard/Margin/DetailVBox"]
+layout_mode = 2
+
+[node name="DetailDesc" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/EvidenceView/RightCard/Margin/DetailVBox"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.92, 0.90, 0.85, 1)
+theme_override_font_sizes/font_size = 14
+text = "Select an item to view its details and 3D preview."
+autowrap_mode = 2
+
+[node name="DetailCount" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/EvidenceView/RightCard/Margin/DetailVBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.95, 0.92, 0.8, 1)
+theme_override_font_sizes/font_size = 14
+text = "-"
+horizontal_alignment = 1
+
+[node name="HSeparator2" type="HSeparator" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="BottomBar" type="HBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="HintLabel" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/BottomBar"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.75, 0.70, 0.60, 0.85)
+theme_override_font_sizes/font_size = 13
+text = "[Q] Quests  •  [I] Items  •  [U] Equipment  •  [TAB] Switch  •  [ESC] Close"
+
+[node name="Spacer" type="Control" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/BottomBar"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="CloseBottomButton" type="Button" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/BottomBar"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(140, 38)
+layout_mode = 2
+theme_override_font_sizes/font_size = 15
+text = "Close Menu"

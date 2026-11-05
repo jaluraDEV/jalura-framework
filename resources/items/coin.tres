@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="ItemData" format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/objects/coin_model.tscn" id="1_nba5c"]
+[ext_resource type="Script" path="res://scripts/data/item_data.gd" id="2_v0upb"]
+
+[resource]
+script = ExtResource("2_v0upb")
+id = "coin"
+name = "Coin"
+description = "A shiny golden harbor coin."
+model_scene = ExtResource("1_nba5c")
+category = 5
+currency_attribute = ""

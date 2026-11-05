@@ -1,0 +1,64 @@
+[gd_scene format=3 uid="uid://bwobbleworldobj55"]
+
+[ext_resource type="Script" path="res://scripts/interaction/obj_wobble.gd" id="1_wobble_root"]
+[ext_resource type="Script" path="res://scripts/interaction/behaviors/wobble_behavior.gd" id="2_wobble_behavior"]
+[ext_resource type="Script" path="res://scripts/interaction/behaviors/object_feedback.gd" id="3_feedback"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_barrel_wood"]
+albedo_color = Color(0.48, 0.32, 0.18, 1)
+roughness = 0.85
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_barrel"]
+material = SubResource("StandardMaterial3D_barrel_wood")
+top_radius = 0.4
+bottom_radius = 0.42
+height = 0.95
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_barrel_metal"]
+albedo_color = Color(0.3, 0.32, 0.35, 1)
+metallic = 0.7
+roughness = 0.4
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_ring"]
+material = SubResource("StandardMaterial3D_barrel_metal")
+top_radius = 0.41
+bottom_radius = 0.41
+height = 0.08
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_barrel_col"]
+height = 0.95
+radius = 0.42
+
+[node name="ObjWobble" type="Node3D"]
+script = ExtResource("1_wobble_root")
+collision_mode = 0
+
+[node name="Visual" type="Node3D" parent="."]
+
+[node name="BarrelBody" type="MeshInstance3D" parent="Visual"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.475, 0)
+mesh = SubResource("CylinderMesh_barrel")
+
+[node name="RingTop" type="MeshInstance3D" parent="Visual"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.72, 0)
+mesh = SubResource("CylinderMesh_ring")
+
+[node name="RingBottom" type="MeshInstance3D" parent="Visual"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.23, 0)
+mesh = SubResource("CylinderMesh_ring")
+
+[node name="BodyCollider" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.475, 0)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BodyCollider"]
+shape = SubResource("CylinderShape3D_barrel_col")
+
+[node name="WobbleBehavior" type="Node" parent="."]
+script = ExtResource("2_wobble_behavior")
+
+[node name="ObjectFeedback" type="Node" parent="."]
+script = ExtResource("3_feedback")
+enable_wobble = false
+enable_focus_highlight = true

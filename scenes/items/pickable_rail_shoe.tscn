@@ -1,0 +1,45 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/interaction/pickable_item.gd" id="1_ugre7"]
+[ext_resource type="PackedScene" path="res://assets/chars/extras/rail_shoe.glb" id="2_gr7to"]
+[ext_resource type="Script" path="res://scripts/data/item_data.gd" id="3_5pdu8"]
+[ext_resource type="Script" path="res://scripts/interaction/interactable.gd" id="4_cj50r"]
+
+[sub_resource type="Resource" id="Resource_mk2o3"]
+script = ExtResource("3_5pdu8")
+id = "rail_shoe"
+name = "Rail Shoes"
+description = "Special shoes with reinforced grind soles! Allows grinding along rails."
+model_scene = ExtResource("2_gr7to")
+category = 4
+max_stack = 1
+currency_attribute = ""
+can_drop = false
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_iu14f"]
+radius = 1.25
+
+[node name="PickableRailShoes" type="Node3D" unique_id=967662556]
+script = ExtResource("1_ugre7")
+item_data = SubResource("Resource_mk2o3")
+item_id = "rail_shoe"
+
+[node name="Visual" type="Node3D" parent="." unique_id=958838279]
+
+[node name="rail_shoe" type="Node3D" parent="Visual" unique_id=557689494 instance=ExtResource("2_gr7to")]
+
+[node name="GlowLight" type="OmniLight3D" parent="Visual" unique_id=430155173]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
+light_color = Color(0.9, 0.95, 1, 1)
+light_energy = 1.3
+omni_range = 2.5
+omni_attenuation = 1.1
+
+[node name="Interactable" type="Area3D" parent="." unique_id=17440441]
+collision_layer = 8
+collision_mask = 2
+script = ExtResource("4_cj50r")
+prompt_text = "Rail Shoes aufheben"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Interactable" unique_id=1154618631]
+shape = SubResource("SphereShape3D_iu14f")

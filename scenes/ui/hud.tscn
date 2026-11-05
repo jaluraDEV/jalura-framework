@@ -1,0 +1,421 @@
+[gd_scene format=3 uid="uid://cbmvd0ep0p6k2"]
+
+[ext_resource type="Script" path="res://scripts/ui/hud.gd" id="1_hud"]
+[ext_resource type="PackedScene" path="res://scenes/ui/celebration_stage.tscn" id="3_stage"]
+[ext_resource type="PackedScene" path="res://scenes/ui/pause_menu.tscn" id="4_pause"]
+[ext_resource type="PackedScene" path="res://scenes/ui/inventory_menu.tscn" id="5_inv"]
+[ext_resource type="Theme" path="res://assets/ui/jalura_theme.tres" id="9_theme"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_energy"]
+content_margin_left = 12.0
+content_margin_top = 4.0
+content_margin_right = 12.0
+content_margin_bottom = 4.0
+bg_color = Color(0.14, 0.13, 0.12, 0.94)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.72, 0.62, 0.46, 0.75)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+shadow_color = Color(0, 0, 0, 0.5)
+shadow_size = 6
+
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_prompt"]
+bg_color = Color(0.15, 0.14, 0.13, 0.95)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.85, 0.74, 0.52, 0.85)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+expand_margin_left = 18.0
+expand_margin_top = 8.0
+expand_margin_right = 18.0
+expand_margin_bottom = 8.0
+shadow_color = Color(0, 0, 0, 0.6)
+shadow_size = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dialogue"]
+bg_color = Color(0.12, 0.11, 0.1, 0.96)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.78, 0.66, 0.48, 0.8)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+shadow_color = Color(0, 0, 0, 0.75)
+shadow_size = 28
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ribbon"]
+bg_color = Color(0.55, 0.12, 0.12, 0.96)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.92, 0.78, 0.48, 0.85)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+expand_margin_left = 22.0
+expand_margin_top = 6.0
+expand_margin_right = 22.0
+expand_margin_bottom = 6.0
+shadow_color = Color(0, 0, 0, 0.6)
+shadow_size = 14
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_reward"]
+bg_color = Color(0.14, 0.13, 0.12, 0.96)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.95, 0.82, 0.35, 0.85)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+expand_margin_left = 24.0
+expand_margin_top = 8.0
+expand_margin_right = 24.0
+expand_margin_bottom = 8.0
+shadow_color = Color(0.85, 0.65, 0.2, 0.25)
+shadow_size = 16
+
+[node name="HUD" type="CanvasLayer"]
+layer = 2
+script = ExtResource("1_hud")
+
+[node name="TopBar" type="HBoxContainer" parent="."]
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 24.0
+offset_top = 20.0
+offset_right = -24.0
+offset_bottom = 60.0
+grow_horizontal = 2
+theme = ExtResource("9_theme")
+
+[node name="BatteryContainer" type="PanelContainer" parent="TopBar"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_energy")
+
+[node name="HBox" type="HBoxContainer" parent="TopBar/BatteryContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="BatteryIcon" type="TextureRect" parent="TopBar/BatteryContainer/HBox"]
+custom_minimum_size = Vector2(22, 24)
+layout_mode = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="BatteryLabel" type="Label" parent="TopBar/BatteryContainer/HBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.96, 0.94, 0.88, 1)
+theme_override_font_sizes/font_size = 18
+text = "0"
+
+[node name="SpacerLeft" type="Control" parent="TopBar"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="FpsContainer" type="PanelContainer" parent="TopBar"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_energy")
+
+[node name="FpsLabel" type="Label" parent="TopBar/FpsContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.85, 0.88, 0.80, 1)
+theme_override_font_sizes/font_size = 15
+text = "60 FPS"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SpacerRight" type="Control" parent="TopBar"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="RightHintsVBox" type="VBoxContainer" parent="TopBar"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/separation = 6
+
+[node name="BagHintContainer" type="PanelContainer" parent="TopBar/RightHintsVBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_energy")
+
+[node name="BagHintLabel" type="Label" parent="TopBar/RightHintsVBox/BagHintContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.95, 0.92, 0.82, 1)
+theme_override_font_sizes/font_size = 15
+text = "💼 [I] Items"
+horizontal_alignment = 1
+
+[node name="CasesHintContainer" type="PanelContainer" parent="TopBar/RightHintsVBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_energy")
+
+[node name="CasesHintLabel" type="Label" parent="TopBar/RightHintsVBox/CasesHintContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.95, 0.92, 0.82, 1)
+theme_override_font_sizes/font_size = 15
+text = "📋 [Q] Quests"
+horizontal_alignment = 1
+
+
+[node name="CenterPrompt" type="Control" parent="."]
+
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("9_theme")
+
+[node name="PromptPanel" type="PanelContainer" parent="CenterPrompt"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -120.0
+offset_top = 160.0
+offset_right = 120.0
+offset_bottom = 205.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_prompt")
+
+[node name="PromptLabel" type="Label" parent="CenterPrompt/PromptPanel"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.96, 0.94, 0.88, 1)
+theme_override_font_sizes/font_size = 18
+text = "[E]  Interact"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DialogueContainer" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("9_theme")
+
+[node name="DialoguePanel" type="PanelContainer" parent="DialogueContainer"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -340.0
+offset_top = -210.0
+offset_right = 340.0
+offset_bottom = -35.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_dialogue")
+
+[node name="MarginContainer" type="MarginContainer" parent="DialogueContainer/DialoguePanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="DialogueContainer/DialoguePanel/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="SpeakerLabel" type="Label" parent="DialogueContainer/DialoguePanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.96, 0.82, 0.4, 1)
+theme_override_font_sizes/font_size = 20
+text = "Mara"
+
+[node name="DecoDivider" type="TextureRect" parent="DialogueContainer/DialoguePanel/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 14)
+layout_mode = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="DialogueText" type="Label" parent="DialogueContainer/DialoguePanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.94, 0.93, 0.88, 1)
+theme_override_font_sizes/font_size = 17
+text = "Ahoy! Could you bring me a shiny coin?"
+autowrap_mode = 2
+
+[node name="DialogueHint" type="Label" parent="DialogueContainer/DialoguePanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.72, 0.68, 0.60, 0.85)
+theme_override_font_sizes/font_size = 14
+text = "[E] Continue..."
+horizontal_alignment = 2
+
+[node name="CelebrationOverlay" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("9_theme")
+
+[node name="ViewportContainer" type="SubViewportContainer" parent="CelebrationOverlay"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="CelebrationOverlay/ViewportContainer"]
+own_world_3d = true
+transparent_bg = false
+handle_input_locally = false
+size = Vector2i(1280, 720)
+render_target_update_mode = 3
+
+[node name="CelebrationStage" parent="CelebrationOverlay/ViewportContainer/SubViewport" instance=ExtResource("3_stage")]
+
+[node name="ConfettiParticles" type="CPUParticles2D" parent="CelebrationOverlay"]
+position = Vector2(640, 360)
+emitting = false
+amount = 60
+lifetime = 2.2
+one_shot = false
+explosiveness = 0.75
+randomness = 0.6
+lifetime_randomness = 0.4
+spread = 180.0
+gravity = Vector2(0, 160)
+initial_velocity_min = 160.0
+initial_velocity_max = 420.0
+scale_amount_min = 4.0
+scale_amount_max = 9.0
+color = Color(1, 0.9, 0.28, 1)
+
+[node name="TopBanner" type="VBoxContainer" parent="CelebrationOverlay"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -340.0
+offset_top = 36.0
+offset_right = 340.0
+offset_bottom = 155.0
+grow_horizontal = 2
+theme_override_constants/separation = 6
+alignment = 1
+
+[node name="RibbonPanel" type="PanelContainer" parent="CelebrationOverlay/TopBanner"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_ribbon")
+
+[node name="BannerHeader" type="Label" parent="CelebrationOverlay/TopBanner/RibbonPanel"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.95, 0.65, 1)
+theme_override_font_sizes/font_size = 22
+text = "★   Q U E S T   C O M P L E T E   ★"
+horizontal_alignment = 1
+
+[node name="QuestTitle" type="Label" parent="CelebrationOverlay/TopBanner"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.75)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 3
+theme_override_font_sizes/font_size = 34
+text = "A Coin for Mara"
+horizontal_alignment = 1
+
+[node name="StampRect" type="TextureRect" parent="CelebrationOverlay"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 120.0
+offset_top = -250.0
+offset_right = 380.0
+offset_bottom = -110.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -0.15
+pivot_offset = Vector2(130, 70)
+expand_mode = 1
+stretch_mode = 5
+
+[node name="BottomReward" type="VBoxContainer" parent="CelebrationOverlay"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -200.0
+offset_top = -120.0
+offset_right = 200.0
+offset_bottom = -45.0
+grow_horizontal = 2
+grow_vertical = 0
+alignment = 1
+
+[node name="RewardPanel" type="PanelContainer" parent="CelebrationOverlay/BottomReward"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_reward")
+
+[node name="RewardText" type="Label" parent="CelebrationOverlay/BottomReward/RewardPanel"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.92, 0.25, 1)
+theme_override_font_sizes/font_size = 26
+text = "+5 ENERGY"
+horizontal_alignment = 1
+
+[node name="PauseMenu" parent="." instance=ExtResource("4_pause")]
+unique_name_in_owner = true
+
+[node name="InventoryMenu" parent="." instance=ExtResource("5_inv")]
+unique_name_in_owner = true
+

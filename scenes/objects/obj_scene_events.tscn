@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://csceneeventsworldobj01"]
+
+[ext_resource type="Script" path="res://scripts/interaction/obj_scene_events.gd" id="1_root"]
+[ext_resource type="Script" path="res://scripts/interaction/behaviors/scene_events_behavior.gd" id="2_beh"]
+
+[node name="ObjSceneEvents" type="Node3D"]
+script = ExtResource("1_root")
+collision_mode = 0
+
+[node name="SceneEventsBehavior" type="Node" parent="."]
+script = ExtResource("2_beh")

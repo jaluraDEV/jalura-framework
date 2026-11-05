@@ -1,0 +1,52 @@
+[gd_scene format=3 uid="uid://bbhjojgk0tp8s"]
+
+[ext_resource type="Script" path="res://scripts/interaction/obj_pushable.gd" id="1_pushable"]
+[ext_resource type="Script" path="res://scripts/interaction/behaviors/pushable_behavior.gd" id="2_pushable_behavior"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_crate_wood"]
+albedo_color = Color(0.55, 0.38, 0.22, 1)
+roughness = 0.8
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_crate_metal"]
+albedo_color = Color(0.32, 0.34, 0.38, 1)
+metallic = 0.8
+roughness = 0.35
+
+[sub_resource type="BoxMesh" id="BoxMesh_crate_main"]
+material = SubResource("StandardMaterial3D_crate_wood")
+size = Vector3(1.18, 1.1, 1.18)
+
+[sub_resource type="BoxMesh" id="BoxMesh_crate_frame"]
+material = SubResource("StandardMaterial3D_crate_metal")
+size = Vector3(1.22, 0.1, 1.22)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_crate"]
+size = Vector3(1.2, 1.2, 1.2)
+
+[node name="ObjPushable" type="Node3D" groups=["pushables"]]
+script = ExtResource("1_pushable")
+collision_mode = 0
+
+[node name="BlockBody" type="AnimatableBody3D" parent="." groups=["pushables"]]
+collision_layer = 1
+collision_mask = 1
+sync_to_physics = false
+
+[node name="CrateMesh" type="MeshInstance3D" parent="BlockBody"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
+mesh = SubResource("BoxMesh_crate_main")
+
+[node name="FrameTopMesh" type="MeshInstance3D" parent="BlockBody"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.15, 0)
+mesh = SubResource("BoxMesh_crate_frame")
+
+[node name="FrameBottomMesh" type="MeshInstance3D" parent="BlockBody"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
+mesh = SubResource("BoxMesh_crate_frame")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BlockBody"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
+shape = SubResource("BoxShape3D_crate")
+
+[node name="PushableBehavior" type="Node" parent="."]
+script = ExtResource("2_pushable_behavior")

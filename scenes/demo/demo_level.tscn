@@ -1,0 +1,741 @@
+[gd_scene format=3 uid="uid://b6c841ipb3rgp"]
+
+[ext_resource type="Material" path="res://resources/materials/checker.tres" id="1_bqfrd"]
+[ext_resource type="Material" uid="uid://watermat0001" path="res://assets/shader/water/water_material.tres" id="2_mb7ni"]
+[ext_resource type="PackedScene" path="res://scenes/objects/water_zone.tscn" id="3_yyahf"]
+[ext_resource type="PackedScene" uid="uid://dtr7r6bnbek68" path="res://assets/hauser/hafen/fishing_boat.glb" id="6_2u0vn"]
+[ext_resource type="Shape3D" path="res://assets/hauser/hafen/fishing_boat_collision.tres" id="7_63rut"]
+[ext_resource type="PackedScene" uid="uid://qjp2suvgpra3" path="res://scenes/objects/door_trigger.tscn" id="8_udxj2"]
+[ext_resource type="Script" uid="uid://dp4uan0lqmklv" path="res://scripts/world/rail_3d.gd" id="10_1p5qr"]
+[ext_resource type="Material" uid="uid://b7vrailmat01" path="res://assets/umgebung/plattformen/rail_material.tres" id="11_5mrv8"]
+[ext_resource type="PackedScene" uid="uid://cxr1tj50spm77" path="res://scenes/objects/obj_water_trampoline.tscn" id="12_thr31"]
+[ext_resource type="PackedScene" uid="uid://b33ty3v2o0eqq" path="res://scenes/objects/obj_npc_grantelbart.tscn" id="14_3rm10"]
+[ext_resource type="PackedScene" uid="uid://ccbgk4fps4kvw" path="res://scenes/objects/obj_chest.tscn" id="16_1ps1b"]
+[ext_resource type="PackedScene" uid="uid://cpr6n6bj4o5lk" path="res://scenes/objects/obj_door.tscn" id="18_ip27p"]
+[ext_resource type="PackedScene" uid="uid://ca30xg83tievo" path="res://scenes/objects/obj_lever.tscn" id="20_jeutp"]
+[ext_resource type="PackedScene" uid="uid://cux2hgh57ao0o" path="res://scenes/objects/obj_pressure_plate.tscn" id="22_rqkmq"]
+[ext_resource type="PackedScene" uid="uid://bbhjojgk0tp8s" path="res://scenes/objects/obj_pushable.tscn" id="24_4b4cn"]
+[ext_resource type="PackedScene" uid="uid://diqy7msmqmglx" path="res://scenes/objects/obj_sign.tscn" id="26_rwg4u"]
+[ext_resource type="PackedScene" path="res://scenes/objects/pickable_item.tscn" id="28_a2kce"]
+[ext_resource type="Script" uid="uid://bd7yqkak6x2dm" path="res://scripts/world/spawn_point.gd" id="30_ix8ia"]
+[ext_resource type="PackedScene" uid="uid://naq7f0bp3e6s" path="res://scenes/player.tscn" id="31_6fl2m"]
+[ext_resource type="PackedScene" uid="uid://cbmvd0ep0p6k2" path="res://scenes/ui/hud.tscn" id="33_g08bn"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_yso8x"]
+sky_top_color = Color(0.2, 0.42, 0.72, 1)
+sky_horizon_color = Color(0.55, 0.68, 0.82, 1)
+ground_bottom_color = Color(0.14, 0.15, 0.17, 1)
+ground_horizon_color = Color(0.3, 0.32, 0.35, 1)
+
+[sub_resource type="Sky" id="Sky_ltfts"]
+sky_material = SubResource("ProceduralSkyMaterial_yso8x")
+
+[sub_resource type="Environment" id="Environment_rnmqm"]
+background_mode = 2
+sky = SubResource("Sky_ltfts")
+ambient_light_source = 3
+ambient_light_energy = 0.55
+tonemap_mode = 3
+ssao_enabled = true
+ssao_radius = 1.2
+glow_intensity = 0.25
+glow_bloom = 0.04
+volumetric_fog_density = 0.0012
+
+[sub_resource type="BoxMesh" id="BoxMesh_3q1ao"]
+size = Vector3(64, 3, 40)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_yv1ma"]
+size = Vector3(64, 3, 40)
+
+[sub_resource type="BoxMesh" id="BoxMesh_d2eqq"]
+size = Vector3(64, 0.8, 40)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_6of5p"]
+size = Vector3(64, 0.8, 40)
+
+[sub_resource type="BoxMesh" id="BoxMesh_k2v4u"]
+size = Vector3(68, 5, 3)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_llyjd"]
+size = Vector3(68, 5, 3)
+
+[sub_resource type="BoxMesh" id="BoxMesh_wyp4x"]
+size = Vector3(68, 5, 3)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_h6fkv"]
+size = Vector3(68, 5, 3)
+
+[sub_resource type="BoxMesh" id="BoxMesh_k2rvn"]
+size = Vector3(3, 5, 84)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_mhc8s"]
+size = Vector3(3, 5, 84)
+
+[sub_resource type="BoxMesh" id="BoxMesh_v7v2l"]
+size = Vector3(3, 5, 84)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1gcmc"]
+size = Vector3(3, 5, 84)
+
+[sub_resource type="BoxMesh" id="BoxMesh_xrhy8"]
+size = Vector3(5, 6.2, 5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_qa37c"]
+size = Vector3(5, 6.2, 5)
+
+[sub_resource type="BoxMesh" id="BoxMesh_4kn4r"]
+size = Vector3(8.5, 0.6, 8.5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_mbk7c"]
+size = Vector3(8.5, 0.6, 8.5)
+
+[sub_resource type="BoxMesh" id="BoxMesh_mjfdi"]
+size = Vector3(4, 1, 4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3ywk2"]
+size = Vector3(4, 1, 4)
+
+[sub_resource type="BoxMesh" id="BoxMesh_r0soo"]
+size = Vector3(4, 2.2, 4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_qv63b"]
+size = Vector3(4, 2.2, 4)
+
+[sub_resource type="BoxMesh" id="BoxMesh_dfu4f"]
+size = Vector3(4, 3.4, 4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_g3ado"]
+size = Vector3(4, 3.4, 4)
+
+[sub_resource type="BoxMesh" id="BoxMesh_0q45b"]
+size = Vector3(4, 4.6, 4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_e6d55"]
+size = Vector3(4, 4.6, 4)
+
+[sub_resource type="BoxMesh" id="BoxMesh_3081j"]
+size = Vector3(4, 5.8, 4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_efvjx"]
+size = Vector3(4, 5.8, 4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_fpw5n"]
+size = Vector3(3.5, 2.2, 3.5)
+
+[sub_resource type="BoxMesh" id="BoxMesh_xmt6j"]
+size = Vector3(3.5, 4.7, 3.5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_wgnag"]
+size = Vector3(3.5, 4.7, 3.5)
+
+[sub_resource type="BoxMesh" id="BoxMesh_pftus"]
+size = Vector3(6, 0.6, 6)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_67jo3"]
+size = Vector3(6, 0.6, 6)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_nw2ty"]
+size = Vector3(3, 0.3, 3.6)
+
+[sub_resource type="BoxMesh" id="BoxMesh_in6nu"]
+size = Vector3(1.4, 0.35, 1.4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_5r1i2"]
+size = Vector3(1.4, 0.35, 1.4)
+
+[sub_resource type="BoxMesh" id="BoxMesh_gdpup"]
+size = Vector3(1.4, 0.35, 1.4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_hefor"]
+size = Vector3(1.4, 0.35, 1.4)
+
+[sub_resource type="BoxMesh" id="BoxMesh_3ogu4"]
+size = Vector3(1.4, 0.35, 1.4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_hvgyp"]
+size = Vector3(1.4, 0.35, 1.4)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ocljo"]
+size = Vector3(2.2, 3.2, 1.2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_dkkoy"]
+size = Vector3(2.2, 3.2, 1.2)
+
+[sub_resource type="BoxMesh" id="BoxMesh_0qnol"]
+size = Vector3(2.2, 3.2, 1.2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_xp4my"]
+size = Vector3(2.2, 3.2, 1.2)
+
+[sub_resource type="BoxMesh" id="BoxMesh_trk80"]
+size = Vector3(7.4, 3.2, 1.2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_q5ejj"]
+size = Vector3(7.4, 3.2, 1.2)
+
+[sub_resource type="BoxMesh" id="BoxMesh_5nhrk"]
+size = Vector3(1.2, 3.2, 4.8)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_42i1w"]
+size = Vector3(1.2, 3.2, 4.8)
+
+[sub_resource type="BoxMesh" id="BoxMesh_qdheq"]
+size = Vector3(1.2, 3.2, 4.8)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_y75ag"]
+size = Vector3(1.2, 3.2, 4.8)
+
+[sub_resource type="BoxMesh" id="BoxMesh_cqchp"]
+size = Vector3(7.4, 0.6, 5.2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_a15vq"]
+size = Vector3(7.4, 0.6, 5.2)
+
+[sub_resource type="BoxMesh" id="BoxMesh_3mpnv"]
+size = Vector3(12, 4.6, 12)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_5xoak"]
+size = Vector3(12, 4.6, 12)
+
+[sub_resource type="BoxMesh" id="BoxMesh_tf4wa"]
+size = Vector3(6, 1.4, 6)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ora7u"]
+size = Vector3(6, 1.4, 6)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_nb1la"]
+size = Vector2(64, 40)
+subdivide_width = 64
+subdivide_depth = 48
+
+[sub_resource type="Curve3D" id="Curve3D_y3nbb"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 3, 0, 1, 1.8, 6.75, -3.5, -2.5, 0.5, -1.5, 2.5, -0.5, 1.5, 7, 5.2, -1, -2, 0.5, -2, 2, -0.5, 2, 11, 4, 3, -1.5, 0.5, -2, 1.5, -0.5, 2, 13.5, 2.2, 8, 1.5, 0.3, -2, 0, 0, 0, 10, 0.42, 14),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0)
+}
+point_count = 5
+
+[node name="DemoLevel" type="Node3D" unique_id=1024422008]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=2056118956]
+environment = SubResource("Environment_rnmqm")
+
+[node name="Sun" type="DirectionalLight3D" parent="." unique_id=712215904]
+transform = Transform3D(0.7880108, -0.4575257, 0.41195792, 0, 0.66913056, 0.74314487, -0.6156615, -0.58560616, 0.5272821, 0, 0, 0)
+light_energy = 1.8
+shadow_enabled = true
+
+[node name="Geometry" type="Node3D" parent="." unique_id=1322379488]
+
+[node name="Floor" type="StaticBody3D" parent="Geometry" unique_id=76901469]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, -4)
+
+[node name="Mesh" type="MeshInstance3D" parent="Geometry/Floor" unique_id=1286152189]
+material_override = ExtResource("1_bqfrd")
+mesh = SubResource("BoxMesh_3q1ao")
+
+[node name="Collision" type="CollisionShape3D" parent="Geometry/Floor" unique_id=838818889]
+shape = SubResource("BoxShape3D_yv1ma")
+
+[node name="Harbor_Seabed" type="StaticBody3D" parent="Geometry" unique_id=1744198230]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.4, 36)
+
+[node name="Mesh" type="MeshInstance3D" parent="Geometry/Harbor_Seabed" unique_id=1858044116]
+material_override = ExtResource("1_bqfrd")
+mesh = SubResource("BoxMesh_d2eqq")
+
+[node name="Collision" type="CollisionShape3D" parent="Geometry/Harbor_Seabed" unique_id=1741654143]
+shape = SubResource("BoxShape3D_6of5p")
+
+[node name="Wall_North" type="StaticBody3D" parent="Geometry" unique_id=1434666384]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, -25.5)
+
+[node name="Mesh" type="MeshInstance3D" parent="Geometry/Wall_North" unique_id=517903130]
+material_override = ExtResource("1_bqfrd")
+mesh = SubResource("BoxMesh_k2v4u")
+
+[node name="Collision" type="CollisionShape3D" parent="Geometry/Wall_North" unique_id=553216659]
+shape = SubResource("BoxShape3D_llyjd")
+
+[node name="Wall_South" type="StaticBody3D" parent="Geometry" unique_id=249421696]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 57.5)
+
+[node name="Mesh" type="MeshInstance3D" parent="Geometry/Wall_South" unique_id=104596464]
+material_override = ExtResource("1_bqfrd")
+mesh = SubResource("BoxMesh_wyp4x")
+
+[node name="Collision" type="CollisionShape3D" parent="Geometry/Wall_South" unique_id=1385811615]
+shape = SubResource("BoxShape3D_h6fkv")
+
+[node name="Wall_East" type="StaticBody3D" parent="Geometry" unique_id=324183988]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 33.5, 1.75, 16)
+
+[node name="Mesh" type="MeshInstance3D" parent="Geometry/Wall_East" unique_id=1497439098]
+material_override = ExtResource("1_bqfrd")
+mesh = SubResource("BoxMesh_k2rvn")
+
+[node name="Collision" type="CollisionShape3D" parent="Geometry/Wall_East" unique_id=1124181366]
+shape = SubResource("BoxShape3D_mhc8s")
+
+[node name="Wall_West" type="StaticBody3D" parent="Geometry" unique_id=749300581]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -33.5, 1.75, 16)
+
+[node name="Mesh" type="MeshInstance3D" parent="Geometry/Wall_West" unique_id=447207924]
+material_override = ExtResource("1_bqfrd")
+mesh = SubResource("BoxMesh_v7v2l")
+
+[node name="Collision" type="CollisionShape3D" parent="Geometry/Wall_West" unique_id=1695282855]
+shape = SubResource("BoxShape3D_1gcmc")
+
+[node name="Tower_Pillar" type="StaticBody3D" parent="Geometry" unique_id=1268148897]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 3.1, -4)
+
+[node name="Mesh" type="MeshInstance3D" parent="Geometry/Tower_Pillar" unique_id=1633198352]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0032930374, 0.013809681, -0.0024056435)
+material_override = ExtResource("1_bqfrd")
+mesh = SubResource("BoxMesh_xrhy8")
+
+[node name="Collision" type="CollisionShape3D" parent="Geometry/Tower_Pillar" unique_id=87099057]
+shape = SubResource("BoxShape3D_qa37c")
+
+[node name="Tower_Platform" type="StaticBody3D" parent="Geometry" unique_id=2147030069]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 6.3, -4)
+
+[node name="Mesh" type="MeshInstance3D" parent="Geometry/Tower_Platform" unique_id=1242613256]
+material_override = ExtResource("1_bqfrd")
+mesh = SubResource("BoxMesh_4kn4r")
+
+[node name="Collision" type="CollisionShape3D" parent="Geometry/Tower_Platform" unique_id=121445289]
+shape = SubResource("BoxShape3D_mbk7c")
+
+[node name="Step_0" type="StaticBody3D" parent="Geometry" unique_id=1358624367]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0.5, -12)
+
+[node name="Mesh" type="MeshInstance3D" parent="Geometry/Step_0" unique_id=78814510]
+material_override = ExtResource("1_bqfrd")
+mesh = SubResource("BoxMesh_mjfdi")
+
+[node name="Collision" type="CollisionShape3D" parent="Geometry/Step_0" unique_id=1871150251]
+shape = SubResource("BoxShape3D_3ywk2")
+
+[node name="Step_1" type="StaticBody3D" parent="Geometry" unique_id=671575611]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 1.1, -10)
+
+[node name="Mesh" type="MeshInstance3D" parent="Geometry/Step_1" unique_id=7473722]
+material_override = ExtResource("1_bqfrd")
+mesh = SubResource("BoxMesh_r0soo")
+
+[node name="Collision" type="CollisionShape3D" parent="Geometry/Step_1" unique_id=1003946898]
+shape = SubResource("BoxShape3D_qv63b")
+
+[node name="Step_2" type="StaticBody3D" parent="Geometry" unique_id=1176841398]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 1.7, -8)
+
+[node name="Mesh" type="MeshInstance3D" parent="Geometry/Step_2" unique_id=652290888]
+material_override = ExtResource("1_bqfrd")
+mesh = SubResource("BoxMesh_dfu4f")
+
+[node name="Collision" type="CollisionShape3D" parent="Geometry/Step_2" unique_id=833769365]
+shape = SubResource("BoxShape3D_g3ado")
+
+[node name="Step_3" type="StaticBody3D" parent="Geometry" unique_id=330324918]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 2.3, -6)
+
+[node name="Mesh" type="MeshInstance3D" parent="Geometry/Step_3" unique_id=503393595]
+material_override = ExtResource("1_bqfrd")
+mesh = SubResource("BoxMesh_0q45b")
+
+[node name="Collision" type="CollisionShape3D" parent="Geometry/Step_3" unique_id=1248421312]
+shape = SubResource("BoxShape3D_e6d55")
+
+[node name="Step_4" type="StaticBody3D" parent="Geometry" unique_id=1452600167]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 2.9, -4.5)
+
+[node name="Mesh" type="MeshInstance3D" parent="Geometry/Step_4" unique_id=1320517531]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.4782915, 0, 0)
+material_override = ExtResource("1_bqfrd")
+mesh = SubResource("BoxMesh_3081j")
+
+[node name="Collision" type="CollisionShape3D" parent="Geometry/Step_4" unique_id=2003241464]
+shape = SubResource("BoxShape3D_efvjx")
+
+[node name="Platform_A_Pillar" type="StaticBody3D" parent="Geometry" unique_id=792960367]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 1.1, 5)
+
+[node name="Collision" type="CollisionShape3D" parent="Geometry/Platform_A_Pillar" unique_id=2035764982]
+shape = SubResource("BoxShape3D_fpw5n")
+
+[node name="Platform_A" type="StaticBody3D" parent="Geometry" unique_id=2077810985]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 2.2, 5)
+
+[node name="Platform_B_Pillar" type="StaticBody3D" parent="Geometry" unique_id=345590954]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 2.35, -4)
+
+[node name="Mesh" type="MeshInstance3D" parent="Geometry/Platform_B_Pillar" unique_id=993933948]
+material_override = ExtResource("1_bqfrd")
+mesh = SubResource("BoxMesh_xmt6j")
+
+[node name="Collision" type="CollisionShape3D" parent="Geometry/Platform_B_Pillar" unique_id=977317416]
+shape = SubResource("BoxShape3D_wgnag")
+
+[node name="Platform_B" type="StaticBody3D" parent="Geometry" unique_id=1518815850]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 4.7, -4)
+
+[node name="Mesh" type="MeshInstance3D" parent="Geometry/Platform_B" unique_id=374232370]
+material_override = ExtResource("1_bqfrd")
+mesh = SubResource("BoxMesh_pftus")
+
+[node name="Collision" type="CollisionShape3D" parent="Geometry/Platform_B" unique_id=1841183437]
+shape = SubResource("BoxShape3D_67jo3")
+
+[node name="Boat_Gangway" type="StaticBody3D" parent="Geometry" unique_id=37104720]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0.1, 30.2)
+
+[node name="Collision" type="CollisionShape3D" parent="Geometry/Boat_Gangway" unique_id=103218801]
+shape = SubResource("BoxShape3D_nw2ty")
+
+[node name="Pedestal_Shoes" type="StaticBody3D" parent="Geometry" unique_id=1341485894]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.2, 0.175, 6.5)
+
+[node name="Mesh" type="MeshInstance3D" parent="Geometry/Pedestal_Shoes" unique_id=774987390]
+material_override = ExtResource("1_bqfrd")
+mesh = SubResource("BoxMesh_in6nu")
+
+[node name="Collision" type="CollisionShape3D" parent="Geometry/Pedestal_Shoes" unique_id=1831868506]
+shape = SubResource("BoxShape3D_5r1i2")
+
+[node name="Pedestal_Glider" type="StaticBody3D" parent="Geometry" unique_id=137324566]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.175, 6.5)
+
+[node name="Mesh" type="MeshInstance3D" parent="Geometry/Pedestal_Glider" unique_id=633997881]
+material_override = ExtResource("1_bqfrd")
+mesh = SubResource("BoxMesh_gdpup")
+
+[node name="Collision" type="CollisionShape3D" parent="Geometry/Pedestal_Glider" unique_id=301749018]
+shape = SubResource("BoxShape3D_hefor")
+
+[node name="Pedestal_Flashlight" type="StaticBody3D" parent="Geometry" unique_id=1565712988]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.2, 0.175, 6.5)
+
+[node name="Mesh" type="MeshInstance3D" parent="Geometry/Pedestal_Flashlight" unique_id=1507083198]
+material_override = ExtResource("1_bqfrd")
+mesh = SubResource("BoxMesh_3ogu4")
+
+[node name="Collision" type="CollisionShape3D" parent="Geometry/Pedestal_Flashlight" unique_id=1996979117]
+shape = SubResource("BoxShape3D_hvgyp")
+
+[node name="PuzzleRoom_WallLeft" type="StaticBody3D" parent="Geometry" unique_id=778508655]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.2, 1.6, 2)
+
+[node name="Mesh" type="MeshInstance3D" parent="Geometry/PuzzleRoom_WallLeft" unique_id=452047317]
+material_override = ExtResource("1_bqfrd")
+mesh = SubResource("BoxMesh_ocljo")
+
+[node name="Collision" type="CollisionShape3D" parent="Geometry/PuzzleRoom_WallLeft" unique_id=754964265]
+shape = SubResource("BoxShape3D_dkkoy")
+
+[node name="PuzzleRoom_WallRight" type="StaticBody3D" parent="Geometry" unique_id=1312954064]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.8, 1.6, 2)
+
+[node name="Mesh" type="MeshInstance3D" parent="Geometry/PuzzleRoom_WallRight" unique_id=391843709]
+material_override = ExtResource("1_bqfrd")
+mesh = SubResource("BoxMesh_0qnol")
+
+[node name="Collision" type="CollisionShape3D" parent="Geometry/PuzzleRoom_WallRight" unique_id=1663058620]
+shape = SubResource("BoxShape3D_xp4my")
+
+[node name="PuzzleRoom_WallBack" type="StaticBody3D" parent="Geometry" unique_id=989028032]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 1.6, -2)
+
+[node name="Mesh" type="MeshInstance3D" parent="Geometry/PuzzleRoom_WallBack" unique_id=305133769]
+material_override = ExtResource("1_bqfrd")
+mesh = SubResource("BoxMesh_trk80")
+
+[node name="Collision" type="CollisionShape3D" parent="Geometry/PuzzleRoom_WallBack" unique_id=1985581734]
+shape = SubResource("BoxShape3D_q5ejj")
+
+[node name="PuzzleRoom_SideWest" type="StaticBody3D" parent="Geometry" unique_id=1694598465]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.1, 1.6, 0)
+
+[node name="Mesh" type="MeshInstance3D" parent="Geometry/PuzzleRoom_SideWest" unique_id=140679763]
+material_override = ExtResource("1_bqfrd")
+mesh = SubResource("BoxMesh_5nhrk")
+
+[node name="Collision" type="CollisionShape3D" parent="Geometry/PuzzleRoom_SideWest" unique_id=974747718]
+shape = SubResource("BoxShape3D_42i1w")
+
+[node name="PuzzleRoom_SideEast" type="StaticBody3D" parent="Geometry" unique_id=1560344086]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.9, 1.6, 0)
+
+[node name="Mesh" type="MeshInstance3D" parent="Geometry/PuzzleRoom_SideEast" unique_id=1920218416]
+material_override = ExtResource("1_bqfrd")
+mesh = SubResource("BoxMesh_qdheq")
+
+[node name="Collision" type="CollisionShape3D" parent="Geometry/PuzzleRoom_SideEast" unique_id=436433244]
+shape = SubResource("BoxShape3D_y75ag")
+
+[node name="PuzzleRoom_Roof" type="StaticBody3D" parent="Geometry" unique_id=1625360752]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 3.5, 0)
+
+[node name="Mesh" type="MeshInstance3D" parent="Geometry/PuzzleRoom_Roof" unique_id=813635460]
+material_override = ExtResource("1_bqfrd")
+mesh = SubResource("BoxMesh_cqchp")
+
+[node name="Collision" type="CollisionShape3D" parent="Geometry/PuzzleRoom_Roof" unique_id=998536944]
+shape = SubResource("BoxShape3D_a15vq")
+
+[node name="Harbor_Island_Base" type="StaticBody3D" parent="Geometry" unique_id=890713487]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, -0.7, 45)
+
+[node name="Mesh" type="MeshInstance3D" parent="Geometry/Harbor_Island_Base" unique_id=650702432]
+material_override = ExtResource("1_bqfrd")
+mesh = SubResource("BoxMesh_3mpnv")
+
+[node name="Collision" type="CollisionShape3D" parent="Geometry/Harbor_Island_Base" unique_id=1480056717]
+shape = SubResource("BoxShape3D_5xoak")
+
+[node name="Harbor_Island_Upper" type="StaticBody3D" parent="Geometry" unique_id=52179383]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 2.3, 46.5)
+
+[node name="Mesh" type="MeshInstance3D" parent="Geometry/Harbor_Island_Upper" unique_id=66637815]
+material_override = ExtResource("1_bqfrd")
+mesh = SubResource("BoxMesh_tf4wa")
+
+[node name="Collision" type="CollisionShape3D" parent="Geometry/Harbor_Island_Upper" unique_id=1727113997]
+shape = SubResource("BoxShape3D_ora7u")
+
+[node name="Harbor" type="Node3D" parent="." unique_id=1898448545]
+
+[node name="WaterSurface" type="MeshInstance3D" parent="Harbor" unique_id=1223955599]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.42, 36)
+material_override = ExtResource("2_mb7ni")
+mesh = SubResource("PlaneMesh_nb1la")
+
+[node name="HarborWaterZone" parent="Harbor" unique_id=686833754 instance=ExtResource("3_yyahf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.85, 36)
+zone_name = "harbor_basin"
+size = Vector2(62, 38)
+show_debug_mesh = false
+
+[node name="FishingBoat" parent="Harbor" unique_id=645896565 instance=ExtResource("6_2u0vn")]
+transform = Transform3D(-0.23075686, 0, -1.860746, 0, 1.8749999, 0, 1.860746, 0, -0.23075686, -10, -0.35, 24.096256)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Harbor/FishingBoat" unique_id=1069303695]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Harbor/FishingBoat/StaticBody3D" unique_id=1333228089]
+shape = ExtResource("7_63rut")
+
+[node name="CabinEntrance" parent="Harbor" unique_id=1160718588 instance=ExtResource("8_udxj2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.533006, 0.19825047, 23.68351)
+collision_layer = 9
+trigger_mode = 2
+target_scene_id = &"bootskabine"
+target_scene_path = "res://scenes/demo/ship_cabin.tscn"
+target_spawn_id = &"von_hafen"
+return_spawn_position = Vector3(-10, 0.5, 14.5)
+zone_size = Vector3(7.355, 2.6, 2.8)
+prompt_text = "Enter Ship Cabin [E]"
+
+[node name="BoatLanternLight" type="OmniLight3D" parent="Harbor" unique_id=215050375]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 3.2, 30.5)
+light_color = Color(1, 0.86, 0.55, 1)
+light_energy = 2.5
+omni_range = 10.0
+
+[node name="TestRail" type="Path3D" parent="." unique_id=1619976725]
+curve = SubResource("Curve3D_y3nbb")
+script = ExtResource("10_1p5qr")
+rail_material = ExtResource("11_5mrv8")
+pipe_radius = 0.09
+snap_distance = 1.45
+
+[node name="Trampolines" type="Node3D" parent="." unique_id=108302099]
+
+[node name="WaterTrampoline_1" parent="Trampolines" unique_id=1846287561 instance=ExtResource("12_thr31")]
+transform = Transform3D(2.15, 0, 0, 0, 2.15, 0, 0, 0, 2.15, 4, -0.35, 20.5)
+water_bob_height = 0.08
+water_bob_tilt_deg = 5.0
+object_id = "demo_level_@EditorNode@19513_@Panel@14_@VBoxContainer@15_DockVSplitMain_DockHSplitMain_@VBoxContainer@37_DockVSplitCenter_@VSplitContainer@101_@VBoxContainer@102_@EditorMainScreen@160_MainScreen_@CanvasItemEditor@10138_@VSplitContainer@9897_@HSplitContainer@9899_@HSplitContainer@9901_@Control@9902_@SubViewportContainer@9903_@SubViewport@9904_DemoLevel_Trampolines_WaterTrampoline_1"
+
+[node name="WaterTrampoline_2" parent="Trampolines" unique_id=465349056 instance=ExtResource("12_thr31")]
+transform = Transform3D(2.15, 0, 0, 0, 2.15, 0, 0, 0, 2.15, 11.5, -0.35, 26.5)
+bounce_velocity = 18.0
+super_bounce_velocity = 24.5
+water_bob_height = 0.08
+water_bob_tilt_deg = 5.0
+object_id = "demo_level_@EditorNode@19513_@Panel@14_@VBoxContainer@15_DockVSplitMain_DockHSplitMain_@VBoxContainer@37_DockVSplitCenter_@VSplitContainer@101_@VBoxContainer@102_@EditorMainScreen@160_MainScreen_@CanvasItemEditor@10138_@VSplitContainer@9897_@HSplitContainer@9899_@HSplitContainer@9901_@Control@9902_@SubViewportContainer@9903_@SubViewport@9904_DemoLevel_Trampolines_WaterTrampoline_2"
+
+[node name="WaterTrampoline_3" parent="Trampolines" unique_id=126620509 instance=ExtResource("12_thr31")]
+transform = Transform3D(2.15, 0, 0, 0, 2.15, 0, 0, 0, 2.15, 18, -0.35, 34)
+bounce_velocity = 18.5
+super_bounce_velocity = 25.0
+water_bob_height = 0.08
+water_bob_tilt_deg = 5.0
+object_id = "demo_level_@EditorNode@19513_@Panel@14_@VBoxContainer@15_DockVSplitMain_DockHSplitMain_@VBoxContainer@37_DockVSplitCenter_@VSplitContainer@101_@VBoxContainer@102_@EditorMainScreen@160_MainScreen_@CanvasItemEditor@10138_@VSplitContainer@9897_@HSplitContainer@9899_@HSplitContainer@9901_@Control@9902_@SubViewportContainer@9903_@SubViewport@9904_DemoLevel_Trampolines_WaterTrampoline_3"
+
+[node name="WaterTrampoline_5" parent="Trampolines" unique_id=1380187211 instance=ExtResource("12_thr31")]
+transform = Transform3D(2.15, 0, 0, 0, 2.15, 0, 0, 0, 2.15, 0.5, -0.35, 33)
+bounce_velocity = 18.0
+super_bounce_velocity = 24.5
+water_bob_height = 0.08
+water_bob_tilt_deg = 5.0
+object_id = "demo_level_@EditorNode@19513_@Panel@14_@VBoxContainer@15_DockVSplitMain_DockHSplitMain_@VBoxContainer@37_DockVSplitCenter_@VSplitContainer@101_@VBoxContainer@102_@EditorMainScreen@160_MainScreen_@CanvasItemEditor@10138_@VSplitContainer@9897_@HSplitContainer@9899_@HSplitContainer@9901_@Control@9902_@SubViewportContainer@9903_@SubViewport@9904_DemoLevel_Trampolines_WaterTrampoline_5"
+
+[node name="Objects" type="Node3D" parent="." unique_id=337278185]
+
+[node name="Mara" parent="Objects" unique_id=1025864562 instance=ExtResource("14_3rm10")]
+transform = Transform3D(-0.81915206, 0, -0.57357645, 0, 1, 0, 0.57357645, 0, -0.81915206, 4, 0, 11)
+object_id = "npc_mara"
+
+[node name="Chest_PlatformB" parent="Objects" unique_id=358595196 instance=ExtResource("16_1ps1b")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 12, 5, -5.5)
+object_id = "chest_platform_b"
+
+[node name="Chest_HarborIsland" parent="Objects" unique_id=1613213555 instance=ExtResource("16_1ps1b")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 16, 3, 46.5)
+object_id = "chest_harbor_island"
+
+[node name="Chest_PuzzleRoom" parent="Objects" unique_id=913821459 instance=ExtResource("16_1ps1b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 0, -0.5)
+object_id = "chest_puzzle_room"
+
+[node name="PuzzleDoor" parent="Objects" unique_id=1842499519 instance=ExtResource("18_ip27p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 0, 2)
+object_id = "puzzle_door"
+
+[node name="PuzzleLever" parent="Objects" unique_id=972817948 instance=ExtResource("20_jeutp")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -23.5, 0, 4.5)
+object_id = "puzzle_lever"
+
+[node name="PressurePlate" parent="Objects" unique_id=1549510103 instance=ExtResource("22_rqkmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17, 0.02, 5.5)
+object_id = "puzzle_plate"
+
+[node name="PushableBlock" parent="Objects" unique_id=1466695652 instance=ExtResource("24_4b4cn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17, 0, 9)
+object_id = "pushable_block_1"
+
+[node name="Sign_Welcome" parent="Objects" unique_id=267407850 instance=ExtResource("26_rwg4u")]
+transform = Transform3D(0.9659258, 0, 0.25881904, 0, 1, 0, -0.25881904, 0, 0.9659258, -2.5, 0, 13)
+title = "Welcome to the Harbor!"
+lines = Array[String](["Welcome to the extended Jalura Framework demo level!", "Right in front of you on the pedestals you will find your equipment: Rail Shoes, Glider, and Flashlight.", "To the south lies the large harbor basin with the pier, your fishing boat, and water trampolines!"])
+object_id = "demo_level_@EditorNode@19513_@Panel@14_@VBoxContainer@15_DockVSplitMain_DockHSplitMain_@VBoxContainer@37_DockVSplitCenter_@VSplitContainer@101_@VBoxContainer@102_@EditorMainScreen@160_MainScreen_@CanvasItemEditor@10138_@VSplitContainer@9897_@HSplitContainer@9899_@HSplitContainer@9901_@Control@9902_@SubViewportContainer@9903_@SubViewport@9904_DemoLevel_Objects_Sign_Welcome"
+
+[node name="Sign_Equipment" parent="Objects" unique_id=563761679 instance=ExtResource("26_rwg4u")]
+transform = Transform3D(0.81915206, 0, 0.57357645, 0, 1, 0, -0.57357645, 0, 0.81915206, -5.2, 0, 6.5)
+title = "Equipment & Tools"
+lines = Array[String](["Collect the 3 equipment items from the pedestals:", "• Rail Shoes: Allow grinding on rails (TestRail).", "• Glider: Hold [Space] in mid-air to glide.", "• Flashlight: Press [F] to toggle. View all tools with [U] or [I] under '⚙️ Equipment'!"])
+object_id = "demo_level_@EditorNode@19513_@Panel@14_@VBoxContainer@15_DockVSplitMain_DockHSplitMain_@VBoxContainer@37_DockVSplitCenter_@VSplitContainer@101_@VBoxContainer@102_@EditorMainScreen@160_MainScreen_@CanvasItemEditor@10138_@VSplitContainer@9897_@HSplitContainer@9899_@HSplitContainer@9901_@Control@9902_@SubViewportContainer@9903_@SubViewport@9904_DemoLevel_Objects_Sign_Equipment"
+
+[node name="Sign_Trampoline" parent="Objects" unique_id=528227140 instance=ExtResource("26_rwg4u")]
+transform = Transform3D(-0.9396926, 0, 0.3420202, 0, 1, 0, -0.3420202, 0, -0.9396926, 5.5, 0, 15.2)
+title = "Water Trampoline Parkour"
+lines = Array[String](["The water trampolines float and bob gently on the waves!", "Jump from trampoline to trampoline across the water to reach the treasure island in the southeast.", "Tip: Press or hold [Space] as you land for an extra high Super-Bounce!"])
+object_id = "demo_level_@EditorNode@19513_@Panel@14_@VBoxContainer@15_DockVSplitMain_DockHSplitMain_@VBoxContainer@37_DockVSplitCenter_@VSplitContainer@101_@VBoxContainer@102_@EditorMainScreen@160_MainScreen_@CanvasItemEditor@10138_@VSplitContainer@9897_@HSplitContainer@9899_@HSplitContainer@9901_@Control@9902_@SubViewportContainer@9903_@SubViewport@9904_DemoLevel_Objects_Sign_Trampoline"
+
+[node name="Sign_Boat" parent="Objects" unique_id=472769408 instance=ExtResource("26_rwg4u")]
+transform = Transform3D(-0.81915206, 0, 0.57357645, 0, 1, 0, -0.57357645, 0, -0.81915206, -6.8, 0, 15.5)
+title = "Harbor Pier & Ship Cabin"
+lines = Array[String](["Here at the stone pier, your fishing boat lies anchored.", "Walk across the pier onto the deck to the cabin door (or press [E]) to enter the interior cabin!"])
+object_id = "demo_level_@EditorNode@19513_@Panel@14_@VBoxContainer@15_DockVSplitMain_DockHSplitMain_@VBoxContainer@37_DockVSplitCenter_@VSplitContainer@101_@VBoxContainer@102_@EditorMainScreen@160_MainScreen_@CanvasItemEditor@10138_@VSplitContainer@9897_@HSplitContainer@9899_@HSplitContainer@9901_@Control@9902_@SubViewportContainer@9903_@SubViewport@9904_DemoLevel_Objects_Sign_Boat"
+
+[node name="Sign_Tower" parent="Objects" unique_id=1148064634 instance=ExtResource("26_rwg4u")]
+transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, -4.5, 6.6, -2.5)
+title = "Watchtower & Grind Rail"
+lines = Array[String](["The grind rail starts up here!", "Once you have equipped the Rail Shoes, jump or run onto the rail tube to grind down to the harbor."])
+object_id = "demo_level_@EditorNode@19513_@Panel@14_@VBoxContainer@15_DockVSplitMain_DockHSplitMain_@VBoxContainer@37_DockVSplitCenter_@VSplitContainer@101_@VBoxContainer@102_@EditorMainScreen@160_MainScreen_@CanvasItemEditor@10138_@VSplitContainer@9897_@HSplitContainer@9899_@HSplitContainer@9901_@Control@9902_@SubViewportContainer@9903_@SubViewport@9904_DemoLevel_Objects_Sign_Tower"
+
+[node name="Coin_Tower" parent="Objects" unique_id=631314186 instance=ExtResource("28_a2kce")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 6.8, -4)
+item_id = "coin"
+unique_id = "demo_coin_tower"
+
+[node name="Coin_SkyChallenge" parent="Objects" unique_id=436683069 instance=ExtResource("28_a2kce")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 8.5, 4)
+item_id = "coin"
+unique_id = "demo_coin_skychallenge"
+
+[node name="Coin_Rail_1" parent="Objects" unique_id=683410472 instance=ExtResource("28_a2kce")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 5.8, -2.8)
+item_id = "coin"
+unique_id = "demo_coin_rail_1"
+
+[node name="Coin_Rail_2" parent="Objects" unique_id=665331226 instance=ExtResource("28_a2kce")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.8, 4.8, -0.2)
+item_id = "coin"
+unique_id = "demo_coin_rail_2"
+
+[node name="Coin_Rail_3" parent="Objects" unique_id=1508336601 instance=ExtResource("28_a2kce")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.6, 3.6, 4.5)
+item_id = "coin"
+unique_id = "demo_coin_rail_3"
+
+[node name="Coin_Rail_4" parent="Objects" unique_id=1612402954 instance=ExtResource("28_a2kce")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 2, 10)
+item_id = "coin"
+unique_id = "demo_coin_rail_4"
+
+[node name="Coin_Water_1" parent="Objects" unique_id=1429757548 instance=ExtResource("28_a2kce")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 3.8, 20.5)
+item_id = "coin"
+unique_id = "demo_coin_water_1"
+
+[node name="Coin_Water_2" parent="Objects" unique_id=1421485450 instance=ExtResource("28_a2kce")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.5, 4.2, 26.5)
+item_id = "coin"
+unique_id = "demo_coin_water_2"
+
+[node name="Coin_Water_3" parent="Objects" unique_id=35407525 instance=ExtResource("28_a2kce")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 4.5, 34)
+item_id = "coin"
+unique_id = "demo_coin_water_3"
+
+[node name="Coin_Water_4" parent="Objects" unique_id=1811093239 instance=ExtResource("28_a2kce")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.5, 4.2, 41.5)
+item_id = "coin"
+unique_id = "demo_coin_water_4"
+
+[node name="RailShoePickup" parent="Objects" unique_id=1596556698 instance=ExtResource("28_a2kce")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.2, 0.45, 6.5)
+item_id = "rail_shoe"
+unique_id = "demo_railshoepickup"
+
+[node name="GliderPickup" parent="Objects" unique_id=1637270350 instance=ExtResource("28_a2kce")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, 6.5)
+item_id = "glider"
+unique_id = "demo_gliderpickup"
+
+[node name="FlashlightPickup" parent="Objects" unique_id=710583052 instance=ExtResource("28_a2kce")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.2, 0.45, 6.5)
+item_id = "flashlight"
+unique_id = "demo_flashlightpickup"
+
+[node name="LampPickup" parent="Objects" unique_id=275475957 instance=ExtResource("28_a2kce")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0.35, 6.5)
+item_id = "lamp"
+unique_id = "demo_lamppickup"
+
+[node name="BatteryPickup" parent="Objects" unique_id=1287295091 instance=ExtResource("28_a2kce")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.2, 0.35, 4.5)
+item_id = "battery"
+item_count = 2
+unique_id = "demo_batterypickup"
+
+[node name="Spawns" type="Node3D" parent="." unique_id=391460699]
+
+[node name="Spawn_Default" type="Marker3D" parent="Spawns" unique_id=669052961]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0.6, 12)
+script = ExtResource("30_ix8ia")
+spawn_id = &"default"
+is_default = true
+
+[node name="Spawn_FromBootskabine" type="Marker3D" parent="Spawns" unique_id=1145407235]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -10, 0.5, 14.5)
+script = ExtResource("30_ix8ia")
+spawn_id = &"von_bootskabine"
+
+[node name="Player" parent="." unique_id=1898056016 instance=ExtResource("31_6fl2m")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0.6, 12)
+
+[node name="HUD" parent="." unique_id=697244971 instance=ExtResource("33_g08bn")]

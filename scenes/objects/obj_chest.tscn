@@ -1,0 +1,47 @@
+[gd_scene format=3 uid="uid://bch3stworldobj89"]
+
+[ext_resource type="Script" path="res://scripts/interaction/obj_chest.gd" id="1_chest"]
+[ext_resource type="Script" path="res://scripts/interaction/behaviors/container_behavior.gd" id="2_container"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_chest_wood"]
+albedo_color = Color(0.42, 0.27, 0.14, 1)
+roughness = 0.8
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_chest_metal"]
+albedo_color = Color(0.85, 0.65, 0.2, 1)
+metallic = 0.8
+roughness = 0.35
+
+[sub_resource type="BoxMesh" id="BoxMesh_base"]
+material = SubResource("StandardMaterial3D_chest_wood")
+size = Vector3(0.8, 0.4, 0.5)
+
+[sub_resource type="BoxMesh" id="BoxMesh_lid"]
+material = SubResource("StandardMaterial3D_chest_wood")
+size = Vector3(0.82, 0.15, 0.52)
+
+[sub_resource type="BoxMesh" id="BoxMesh_latch"]
+material = SubResource("StandardMaterial3D_chest_metal")
+size = Vector3(0.12, 0.1, 0.04)
+
+[node name="ObjChest" type="Node3D"]
+script = ExtResource("1_chest")
+collision_mode = 1
+
+[node name="ChestBase" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
+mesh = SubResource("BoxMesh_base")
+
+[node name="Lid" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, -0.25)
+
+[node name="LidMesh" type="MeshInstance3D" parent="Lid"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.075, 0.26)
+mesh = SubResource("BoxMesh_lid")
+
+[node name="LidLatch" type="MeshInstance3D" parent="Lid"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.02, 0.52)
+mesh = SubResource("BoxMesh_latch")
+
+[node name="ContainerBehavior" type="Node" parent="."]
+script = ExtResource("2_container")

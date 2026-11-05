@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://c6s7f45hyvq0w"]
+
+[ext_resource type="Script" path="res://scripts/ui/pixel_filter.gd" id="1_pixel"]
+[ext_resource type="Shader" path="res://assets/shader/pixel_art.gdshader" id="2_shader"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pixel"]
+shader = ExtResource("2_shader")
+shader_parameter/enabled = true
+shader_parameter/pixel_size = 3.6
+shader_parameter/color_depth = 24
+shader_parameter/dither_strength = 0.035
+
+[node name="PixelFilter" type="CanvasLayer"]
+process_mode = 3
+layer = 0
+script = ExtResource("1_pixel")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_pixel")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2

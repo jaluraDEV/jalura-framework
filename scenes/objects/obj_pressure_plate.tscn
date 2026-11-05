@@ -1,0 +1,49 @@
+[gd_scene format=3 uid="uid://cux2hgh57ao0o"]
+
+[ext_resource type="Script" path="res://scripts/interaction/obj_pressure_plate.gd" id="1_plate"]
+[ext_resource type="Script" path="res://scripts/interaction/behaviors/pressure_plate_behavior.gd" id="2_plate_behavior"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_plate_rim"]
+albedo_color = Color(0.24, 0.25, 0.27, 1)
+roughness = 0.9
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_plate_surface"]
+albedo_color = Color(0.75, 0.6, 0.3, 1)
+metallic = 0.4
+roughness = 0.5
+
+[sub_resource type="BoxMesh" id="BoxMesh_rim"]
+material = SubResource("StandardMaterial3D_plate_rim")
+size = Vector3(1.6, 0.04, 1.6)
+
+[sub_resource type="BoxMesh" id="BoxMesh_surface"]
+material = SubResource("StandardMaterial3D_plate_surface")
+size = Vector3(1.38, 0.08, 1.38)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_trigger"]
+size = Vector3(1.38, 0.6, 1.38)
+
+[node name="ObjPressurePlate" type="Node3D"]
+script = ExtResource("1_plate")
+collision_mode = 0
+
+[node name="RimMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.02, 0)
+mesh = SubResource("BoxMesh_rim")
+
+[node name="PlateMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.06, 0)
+mesh = SubResource("BoxMesh_surface")
+
+[node name="TriggerArea" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TriggerArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
+shape = SubResource("BoxShape3D_trigger")
+
+[node name="PressurePlateBehavior" type="Node" parent="."]
+script = ExtResource("2_plate_behavior")
+plate_mesh_path = NodePath("../PlateMesh")
+detection_area_path = NodePath("../TriggerArea")

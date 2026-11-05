@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ItemData" format=3]
+
+[ext_resource type="PackedScene" path="res://assets/items/alte_lampe/alte_lampe.glb" id="1_4d6kc"]
+[ext_resource type="Script" path="res://scripts/data/item_data.gd" id="2_c26c0"]
+
+[resource]
+script = ExtResource("2_c26c0")
+id = "lamp"
+name = "Flashlight"
+description = "A sturdy vintage box flashlight with a metal handle. Illuminates dark places with [F]."
+model_scene = ExtResource("1_4d6kc")
+category = 4
+max_stack = 1
+currency_attribute = ""
+can_drop = false

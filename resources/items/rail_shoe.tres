@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ItemData" format=3]
+
+[ext_resource type="PackedScene" path="res://assets/chars/extras/rail_shoe.glb" id="1_1e87p"]
+[ext_resource type="Script" path="res://scripts/data/item_data.gd" id="2_e07mo"]
+
+[resource]
+script = ExtResource("2_e07mo")
+id = "rail_shoe"
+name = "Rail Shoes"
+description = "Special shoes with reinforced grind soles! Allows grinding along rails."
+model_scene = ExtResource("1_1e87p")
+category = 4
+max_stack = 1
+currency_attribute = ""
+can_drop = false

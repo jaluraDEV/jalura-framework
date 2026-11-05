@@ -1,0 +1,111 @@
+[gd_scene format=3 uid="uid://c8mdoorworldobj01"]
+
+[ext_resource type="Script" path="res://scripts/interaction/obj_door.gd" id="1_door"]
+[ext_resource type="Script" path="res://scripts/interaction/behaviors/door_behavior.gd" id="2_door_behavior"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_door_frame"]
+albedo_color = Color(0.38, 0.24, 0.14, 1)
+roughness = 0.85
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_door_wood"]
+albedo_color = Color(0.52, 0.35, 0.2, 1)
+roughness = 0.75
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_door_metal"]
+albedo_color = Color(0.85, 0.7, 0.25, 1)
+metallic = 0.85
+roughness = 0.3
+
+[sub_resource type="BoxMesh" id="BoxMesh_post"]
+material = SubResource("StandardMaterial3D_door_frame")
+size = Vector3(0.16, 2.2, 0.2)
+
+[sub_resource type="BoxMesh" id="BoxMesh_lintel"]
+material = SubResource("StandardMaterial3D_door_frame")
+size = Vector3(1.48, 0.16, 0.2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_post_left"]
+size = Vector3(0.16, 2.2, 0.2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_post_right"]
+size = Vector3(0.16, 2.2, 0.2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_lintel"]
+size = Vector3(1.48, 0.16, 0.2)
+
+[sub_resource type="BoxMesh" id="BoxMesh_leaf"]
+material = SubResource("StandardMaterial3D_door_wood")
+size = Vector3(1.16, 2.12, 0.08)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_handle"]
+material = SubResource("StandardMaterial3D_door_metal")
+top_radius = 0.02
+bottom_radius = 0.02
+height = 0.12
+
+[sub_resource type="SphereMesh" id="SphereMesh_knob"]
+material = SubResource("StandardMaterial3D_door_metal")
+radius = 0.04
+height = 0.08
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_leaf"]
+size = Vector3(1.16, 2.12, 0.08)
+
+[node name="ObjDoor" type="Node3D"]
+script = ExtResource("1_door")
+collision_mode = 0
+
+[node name="FrameStaticBody" type="StaticBody3D" parent="."]
+collision_layer = 1
+collision_mask = 1
+
+[node name="PostLeftMesh" type="MeshInstance3D" parent="FrameStaticBody"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.66, 1.1, 0)
+mesh = SubResource("BoxMesh_post")
+
+[node name="PostLeftCol" type="CollisionShape3D" parent="FrameStaticBody"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.66, 1.1, 0)
+shape = SubResource("BoxShape3D_post_left")
+
+[node name="PostRightMesh" type="MeshInstance3D" parent="FrameStaticBody"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.66, 1.1, 0)
+mesh = SubResource("BoxMesh_post")
+
+[node name="PostRightCol" type="CollisionShape3D" parent="FrameStaticBody"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.66, 1.1, 0)
+shape = SubResource("BoxShape3D_post_right")
+
+[node name="LintelMesh" type="MeshInstance3D" parent="FrameStaticBody"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.28, 0)
+mesh = SubResource("BoxMesh_lintel")
+
+[node name="LintelCol" type="CollisionShape3D" parent="FrameStaticBody"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.28, 0)
+shape = SubResource("BoxShape3D_lintel")
+
+[node name="DoorLeaf" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.58, 0, 0)
+
+[node name="LeafMesh" type="MeshInstance3D" parent="DoorLeaf"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.58, 1.06, 0)
+mesh = SubResource("BoxMesh_leaf")
+
+[node name="HandleBase" type="MeshInstance3D" parent="DoorLeaf"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 1.05, 1.05, 0.06)
+mesh = SubResource("CylinderMesh_handle")
+
+[node name="HandleKnob" type="MeshInstance3D" parent="DoorLeaf"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.05, 1.05, 0.12)
+mesh = SubResource("SphereMesh_knob")
+
+[node name="DoorLeafBody" type="AnimatableBody3D" parent="DoorLeaf"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.58, 1.06, 0)
+sync_to_physics = false
+
+[node name="DoorCollider" type="CollisionShape3D" parent="DoorLeaf/DoorLeafBody"]
+shape = SubResource("BoxShape3D_leaf")
+
+[node name="DoorBehavior" type="Node" parent="."]
+script = ExtResource("2_door_behavior")
+leaf_node_path = NodePath("../DoorLeaf")
+collider_node_path = NodePath("../DoorLeaf/DoorLeafBody/DoorCollider")

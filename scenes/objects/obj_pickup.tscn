@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://bpicworldobj71"]
+
+[ext_resource type="Script" path="res://scripts/interaction/obj_pickup.gd" id="1_pickup"]
+[ext_resource type="Script" path="res://scripts/interaction/behaviors/pickable_behavior.gd" id="2_behavior"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_pickup"]
+radius = 0.85
+
+[node name="ObjPickup" type="Node3D"]
+script = ExtResource("1_pickup")
+collision_mode = 0
+
+[node name="Visual" type="Node3D" parent="."]
+
+[node name="PickableBehavior" type="Node" parent="."]
+script = ExtResource("2_behavior")
+visual_node_path = NodePath("../Visual")
+
+[node name="InteractionCollision" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_pickup")

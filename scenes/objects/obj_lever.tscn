@@ -1,0 +1,58 @@
+[gd_scene format=3 uid="uid://d1ev3rworldobj01"]
+
+[ext_resource type="Script" path="res://scripts/interaction/obj_switch.gd" id="1_switch"]
+[ext_resource type="Script" path="res://scripts/interaction/behaviors/switch_behavior.gd" id="2_switch_behavior"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lever_base"]
+albedo_color = Color(0.28, 0.28, 0.32, 1)
+roughness = 0.9
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lever_rod"]
+albedo_color = Color(0.4, 0.42, 0.45, 1)
+metallic = 0.75
+roughness = 0.4
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lever_knob"]
+albedo_color = Color(0.82, 0.2, 0.15, 1)
+metallic = 0.3
+roughness = 0.3
+
+[sub_resource type="BoxMesh" id="BoxMesh_base"]
+material = SubResource("StandardMaterial3D_lever_base")
+size = Vector3(0.36, 0.25, 0.44)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_rod"]
+material = SubResource("StandardMaterial3D_lever_rod")
+top_radius = 0.02
+bottom_radius = 0.025
+height = 0.45
+
+[sub_resource type="SphereMesh" id="SphereMesh_knob"]
+material = SubResource("StandardMaterial3D_lever_knob")
+radius = 0.055
+height = 0.11
+
+[node name="ObjLever" type="Node3D"]
+script = ExtResource("1_switch")
+collision_mode = 1
+
+[node name="LeverBase" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.125, 0)
+mesh = SubResource("BoxMesh_base")
+
+[node name="LeverHandle" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.819152, 0.573576, 0, -0.573576, 0.819152, 0, 0.22, 0)
+
+[node name="RodMesh" type="MeshInstance3D" parent="LeverHandle"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.22, 0)
+mesh = SubResource("CylinderMesh_rod")
+
+[node name="KnobMesh" type="MeshInstance3D" parent="LeverHandle"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.44, 0)
+mesh = SubResource("SphereMesh_knob")
+
+[node name="SwitchBehavior" type="Node" parent="."]
+script = ExtResource("2_switch_behavior")
+handle_node_path = NodePath("../LeverHandle")
+active_rotation = Vector3(35, 0, 0)
+inactive_rotation = Vector3(-35, 0, 0)

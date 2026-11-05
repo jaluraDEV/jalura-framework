@@ -1,0 +1,22 @@
+# Godot 4
+.godot/
+.import/
+*.translation
+
+# Export
+export.cfg
+
+# Temporäre / generierte Dateien
+*.log
+*.tmp
+*.bak
+*.unwrap_cache
+
+# Altprojekt-Archiv (bewusst nicht versioniert)
+_legacy/
+junk/
+
+# Betriebssystem
+Thumbs.db
+desktop.ini
+.DS_Store

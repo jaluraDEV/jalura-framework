@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/demo/demo_level.tscn" id="1_demo"]
+[ext_resource type="Script" path="res://tests/screenshot.gd" id="2_shot"]
+
+[node name="ScreenshotRig" type="Node"]
+script = ExtResource("2_shot")
+
+[node name="Demo" parent="." instance=ExtResource("1_demo")]

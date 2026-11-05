@@ -1,0 +1,592 @@
+[gd_scene format=3 uid="uid://c7title000001"]
+
+[ext_resource type="Script" path="res://scripts/ui/title_screen.gd" id="1_title_script"]
+[ext_resource type="Material" path="res://resources/materials/checker.tres" id="2_checker_mat"]
+[ext_resource type="PackedScene" path="res://scenes/objects/coin_model.tscn" id="3_coin_scene"]
+[ext_resource type="PackedScene" path="res://assets/chars/extras/glider.glb" id="4_glider_model"]
+[ext_resource type="PackedScene" path="res://assets/items/alte_lampe/alte_lampe.glb" id="5_lamp_model"]
+[ext_resource type="Theme" path="res://assets/ui/jalura_theme.tres" id="6_theme"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_sky"]
+sky_top_color = Color(0.24, 0.48, 0.8, 1)
+sky_horizon_color = Color(0.62, 0.74, 0.88, 1)
+sky_curve = 0.14
+ground_bottom_color = Color(0.14, 0.16, 0.2, 1)
+ground_horizon_color = Color(0.48, 0.54, 0.62, 1)
+ground_curve = 0.08
+
+[sub_resource type="Sky" id="Sky_title"]
+sky_material = SubResource("ProceduralSkyMaterial_sky")
+
+[sub_resource type="Environment" id="Environment_title"]
+background_mode = 2
+sky = SubResource("Sky_title")
+ambient_light_source = 2
+ambient_light_color = Color(0.55, 0.62, 0.72, 1)
+ambient_light_energy = 0.65
+tonemap_mode = 3
+glow_enabled = true
+glow_intensity = 0.2
+glow_bloom = 0.05
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_pedestal"]
+material = ExtResource("2_checker_mat")
+top_radius = 2.2
+bottom_radius = 2.5
+height = 0.8
+radial_segments = 32
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_inner"]
+top_radius = 1.95
+bottom_radius = 1.95
+height = 0.82
+radial_segments = 32
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gold"]
+albedo_color = Color(0.95, 0.75, 0.22, 1)
+metallic = 0.85
+roughness = 0.2
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_dust"]
+emission_shape = 3
+emission_box_extents = Vector3(3, 1.5, 3)
+direction = Vector3(0, 1, 0)
+spread = 20.0
+initial_velocity_min = 0.15
+initial_velocity_max = 0.45
+gravity = Vector3(0, 0.05, 0)
+color = Color(1, 0.9, 0.6, 0.4)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dust"]
+transparency = 1
+shading_mode = 0
+albedo_color = Color(1, 0.85, 0.5, 0.5)
+
+[sub_resource type="QuadMesh" id="QuadMesh_dust"]
+material = SubResource("StandardMaterial3D_dust")
+size = Vector2(0.04, 0.04)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn_n"]
+content_margin_left = 28.0
+content_margin_top = 12.0
+content_margin_right = 28.0
+content_margin_bottom = 12.0
+bg_color = Color(0.12, 0.14, 0.18, 0.88)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 1, 1, 0.18)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+shadow_color = Color(0, 0, 0, 0.35)
+shadow_size = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn_h"]
+content_margin_left = 28.0
+content_margin_top = 12.0
+content_margin_right = 28.0
+content_margin_bottom = 12.0
+bg_color = Color(0.24, 0.28, 0.38, 0.95)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 0.85, 0.4, 0.8)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+shadow_color = Color(0.9, 0.7, 0.2, 0.25)
+shadow_size = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_card"]
+content_margin_left = 20.0
+content_margin_top = 20.0
+content_margin_right = 20.0
+content_margin_bottom = 20.0
+bg_color = Color(0.1, 0.12, 0.16, 0.92)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 1, 1, 0.15)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+shadow_color = Color(0, 0, 0, 0.4)
+shadow_size = 12
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_modal"]
+content_margin_left = 32.0
+content_margin_top = 28.0
+content_margin_right = 32.0
+content_margin_bottom = 28.0
+bg_color = Color(0.12, 0.14, 0.18, 0.98)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.9, 0.35, 0.3, 0.7)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+shadow_color = Color(0, 0, 0, 0.6)
+shadow_size = 20
+
+[node name="TitleScreen" type="Node3D"]
+script = ExtResource("1_title_script")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_title")
+
+[node name="Sun" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866025, -0.286788, 0.409576, 0, 0.819152, 0.573576, -0.5, 0.496732, -0.709406, 0, 8, 0)
+light_color = Color(1, 0.94, 0.85, 1)
+light_energy = 1.6
+shadow_enabled = true
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.939693, 0.34202, 0, -0.34202, 0.939693, 0, 1.9, 4.5)
+current = true
+fov = 42.0
+
+[node name="ShowcaseRoot" type="Node3D" parent="."]
+
+[node name="PedestalMesh" type="MeshInstance3D" parent="ShowcaseRoot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
+mesh = SubResource("CylinderMesh_pedestal")
+
+[node name="InnerTrim" type="MeshInstance3D" parent="ShowcaseRoot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.41, 0)
+mesh = SubResource("CylinderMesh_inner")
+surface_material_override/0 = SubResource("StandardMaterial3D_gold")
+
+[node name="DustParticles" type="GPUParticles3D" parent="ShowcaseRoot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
+amount = 24
+lifetime = 3.5
+process_material = SubResource("ParticleProcessMaterial_dust")
+draw_pass_1 = SubResource("QuadMesh_dust")
+
+[node name="ShowcasePivot" type="Node3D" parent="ShowcaseRoot"]
+
+[node name="CoinPivot" type="Node3D" parent="ShowcaseRoot/ShowcasePivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 0)
+
+[node name="CoinModel" parent="ShowcaseRoot/ShowcasePivot/CoinPivot" instance=ExtResource("3_coin_scene")]
+transform = Transform3D(1.4, 0, 0, 0, 1.4, 0, 0, 0, 1.4, 0, 0, 0)
+
+[node name="GliderPivot" type="Node3D" parent="ShowcaseRoot/ShowcasePivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.0, 1.1, -0.6)
+
+[node name="GliderModel" parent="ShowcaseRoot/ShowcasePivot/GliderPivot" instance=ExtResource("4_glider_model")]
+transform = Transform3D(0.45, 0, 0, 0, 0.45, 0, 0, 0, 0.45, 0, 0, 0)
+
+[node name="LampPivot" type="Node3D" parent="ShowcaseRoot/ShowcasePivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.0, 0.95, -0.5)
+
+[node name="LampModel" parent="ShowcaseRoot/ShowcasePivot/LampPivot" instance=ExtResource("5_lamp_model")]
+transform = Transform3D(0.65, 0, 0, 0, 0.65, 0, 0, 0, 0.65, 0, 0, 0)
+
+[node name="LampLight" type="OmniLight3D" parent="ShowcaseRoot/ShowcasePivot/LampPivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
+light_color = Color(1, 0.78, 0.42, 1)
+light_energy = 1.6
+omni_range = 3.5
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="MainLayout" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("6_theme")
+
+[node name="TopSection" type="VBoxContainer" parent="CanvasLayer/MainLayout"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -300.0
+offset_top = 55.0
+offset_right = 300.0
+offset_bottom = 160.0
+grow_horizontal = 2
+theme_override_constants/separation = 6
+alignment = 1
+
+[node name="LogoTitle" type="Label" parent="CanvasLayer/MainLayout/TopSection"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.96, 0.88, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.6)
+theme_override_constants/shadow_offset_y = 3
+theme_override_font_sizes/font_size = 44
+text = "JALURA FRAMEWORK"
+horizontal_alignment = 1
+
+[node name="LogoSubtitle" type="Label" parent="CanvasLayer/MainLayout/TopSection"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.85, 0.88, 0.94, 0.8)
+theme_override_font_sizes/font_size = 16
+text = "Modular 3D Action-Adventure & Platforming Engine"
+horizontal_alignment = 1
+
+[node name="MainButtonsContainer" type="VBoxContainer" parent="CanvasLayer/MainLayout"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -160.0
+offset_top = 10.0
+offset_right = 160.0
+offset_bottom = 270.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 12
+
+[node name="ContinueButton" type="Button" parent="CanvasLayer/MainLayout/MainButtonsContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn_n")
+theme_override_styles/hover = SubResource("StyleBoxFlat_btn_h")
+text = "Continue Game"
+
+[node name="SlotsButton" type="Button" parent="CanvasLayer/MainLayout/MainButtonsContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn_n")
+theme_override_styles/hover = SubResource("StyleBoxFlat_btn_h")
+text = "Save Slots"
+
+[node name="NewGameButton" type="Button" parent="CanvasLayer/MainLayout/MainButtonsContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn_n")
+theme_override_styles/hover = SubResource("StyleBoxFlat_btn_h")
+text = "New Game"
+
+[node name="OptionsButton" type="Button" parent="CanvasLayer/MainLayout/MainButtonsContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn_n")
+theme_override_styles/hover = SubResource("StyleBoxFlat_btn_h")
+text = "Options"
+
+[node name="QuitButton" type="Button" parent="CanvasLayer/MainLayout/MainButtonsContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn_n")
+theme_override_styles/hover = SubResource("StyleBoxFlat_btn_h")
+text = "Quit"
+
+[node name="SlotsContainer" type="Control" parent="CanvasLayer/MainLayout"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CenterBox" type="VBoxContainer" parent="CanvasLayer/MainLayout/SlotsContainer"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -460.0
+offset_top = -140.0
+offset_right = 460.0
+offset_bottom = 260.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="HeaderLabel" type="Label" parent="CanvasLayer/MainLayout/SlotsContainer/CenterBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "SELECT SAVE SLOT"
+horizontal_alignment = 1
+
+[node name="CardsHBox" type="HBoxContainer" parent="CanvasLayer/MainLayout/SlotsContainer/CenterBox"]
+layout_mode = 2
+theme_override_constants/separation = 18
+alignment = 1
+
+[node name="SlotCard1" type="PanelContainer" parent="CanvasLayer/MainLayout/SlotsContainer/CenterBox/CardsHBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(280, 240)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_card")
+
+[node name="Margin" type="MarginContainer" parent="CanvasLayer/MainLayout/SlotsContainer/CenterBox/CardsHBox/SlotCard1"]
+layout_mode = 2
+
+[node name="VBox" type="VBoxContainer" parent="CanvasLayer/MainLayout/SlotsContainer/CenterBox/CardsHBox/SlotCard1/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="TopRow" type="HBoxContainer" parent="CanvasLayer/MainLayout/SlotsContainer/CenterBox/CardsHBox/SlotCard1/Margin/VBox"]
+layout_mode = 2
+
+[node name="TitleLabel1" type="Label" parent="CanvasLayer/MainLayout/SlotsContainer/CenterBox/CardsHBox/SlotCard1/Margin/VBox/TopRow"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "SAVE SLOT 1"
+
+[node name="StatusLabel1" type="Label" parent="CanvasLayer/MainLayout/SlotsContainer/CenterBox/CardsHBox/SlotCard1/Margin/VBox/TopRow"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "EMPTY"
+
+[node name="HSeparator" type="HSeparator" parent="CanvasLayer/MainLayout/SlotsContainer/CenterBox/CardsHBox/SlotCard1/Margin/VBox"]
+layout_mode = 2
+
+[node name="DetailsLabel1" type="Label" parent="CanvasLayer/MainLayout/SlotsContainer/CenterBox/CardsHBox/SlotCard1/Margin/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.8, 0.8, 0.85, 1)
+theme_override_font_sizes/font_size = 14
+text = "No Save Data"
+
+[node name="Spacer" type="Control" parent="CanvasLayer/MainLayout/SlotsContainer/CenterBox/CardsHBox/SlotCard1/Margin/VBox"]
+custom_minimum_size = Vector2(0, 8)
+layout_mode = 2
+
+[node name="PlayButton1" type="Button" parent="CanvasLayer/MainLayout/SlotsContainer/CenterBox/CardsHBox/SlotCard1/Margin/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Load"
+
+[node name="NewButton1" type="Button" parent="CanvasLayer/MainLayout/SlotsContainer/CenterBox/CardsHBox/SlotCard1/Margin/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "New Game"
+
+[node name="DeleteButton1" type="Button" parent="CanvasLayer/MainLayout/SlotsContainer/CenterBox/CardsHBox/SlotCard1/Margin/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Delete"
+
+[node name="SlotCard2" type="PanelContainer" parent="CanvasLayer/MainLayout/SlotsContainer/CenterBox/CardsHBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(280, 240)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_card")
+
+[node name="Margin" type="MarginContainer" parent="CanvasLayer/MainLayout/SlotsContainer/CenterBox/CardsHBox/SlotCard2"]
+layout_mode = 2
+
+[node name="VBox" type="VBoxContainer" parent="CanvasLayer/MainLayout/SlotsContainer/CenterBox/CardsHBox/SlotCard2/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="TopRow" type="HBoxContainer" parent="CanvasLayer/MainLayout/SlotsContainer/CenterBox/CardsHBox/SlotCard2/Margin/VBox"]
+layout_mode = 2
+
+[node name="TitleLabel2" type="Label" parent="CanvasLayer/MainLayout/SlotsContainer/CenterBox/CardsHBox/SlotCard2/Margin/VBox/TopRow"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "SAVE SLOT 2"
+
+[node name="StatusLabel2" type="Label" parent="CanvasLayer/MainLayout/SlotsContainer/CenterBox/CardsHBox/SlotCard2/Margin/VBox/TopRow"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "EMPTY"
+
+[node name="HSeparator" type="HSeparator" parent="CanvasLayer/MainLayout/SlotsContainer/CenterBox/CardsHBox/SlotCard2/Margin/VBox"]
+layout_mode = 2
+
+[node name="DetailsLabel2" type="Label" parent="CanvasLayer/MainLayout/SlotsContainer/CenterBox/CardsHBox/SlotCard2/Margin/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.8, 0.8, 0.85, 1)
+theme_override_font_sizes/font_size = 14
+text = "No Save Data"
+
+[node name="Spacer" type="Control" parent="CanvasLayer/MainLayout/SlotsContainer/CenterBox/CardsHBox/SlotCard2/Margin/VBox"]
+custom_minimum_size = Vector2(0, 8)
+layout_mode = 2
+
+[node name="PlayButton2" type="Button" parent="CanvasLayer/MainLayout/SlotsContainer/CenterBox/CardsHBox/SlotCard2/Margin/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Load"
+
+[node name="NewButton2" type="Button" parent="CanvasLayer/MainLayout/SlotsContainer/CenterBox/CardsHBox/SlotCard2/Margin/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "New Game"
+
+[node name="DeleteButton2" type="Button" parent="CanvasLayer/MainLayout/SlotsContainer/CenterBox/CardsHBox/SlotCard2/Margin/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Delete"
+
+[node name="SlotCard3" type="PanelContainer" parent="CanvasLayer/MainLayout/SlotsContainer/CenterBox/CardsHBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(280, 240)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_card")
+
+[node name="Margin" type="MarginContainer" parent="CanvasLayer/MainLayout/SlotsContainer/CenterBox/CardsHBox/SlotCard3"]
+layout_mode = 2
+
+[node name="VBox" type="VBoxContainer" parent="CanvasLayer/MainLayout/SlotsContainer/CenterBox/CardsHBox/SlotCard3/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="TopRow" type="HBoxContainer" parent="CanvasLayer/MainLayout/SlotsContainer/CenterBox/CardsHBox/SlotCard3/Margin/VBox"]
+layout_mode = 2
+
+[node name="TitleLabel3" type="Label" parent="CanvasLayer/MainLayout/SlotsContainer/CenterBox/CardsHBox/SlotCard3/Margin/VBox/TopRow"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "SAVE SLOT 3"
+
+[node name="StatusLabel3" type="Label" parent="CanvasLayer/MainLayout/SlotsContainer/CenterBox/CardsHBox/SlotCard3/Margin/VBox/TopRow"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "EMPTY"
+
+[node name="HSeparator" type="HSeparator" parent="CanvasLayer/MainLayout/SlotsContainer/CenterBox/CardsHBox/SlotCard3/Margin/VBox"]
+layout_mode = 2
+
+[node name="DetailsLabel3" type="Label" parent="CanvasLayer/MainLayout/SlotsContainer/CenterBox/CardsHBox/SlotCard3/Margin/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.8, 0.8, 0.85, 1)
+theme_override_font_sizes/font_size = 14
+text = "No Save Data"
+
+[node name="Spacer" type="Control" parent="CanvasLayer/MainLayout/SlotsContainer/CenterBox/CardsHBox/SlotCard3/Margin/VBox"]
+custom_minimum_size = Vector2(0, 8)
+layout_mode = 2
+
+[node name="PlayButton3" type="Button" parent="CanvasLayer/MainLayout/SlotsContainer/CenterBox/CardsHBox/SlotCard3/Margin/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Load"
+
+[node name="NewButton3" type="Button" parent="CanvasLayer/MainLayout/SlotsContainer/CenterBox/CardsHBox/SlotCard3/Margin/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "New Game"
+
+[node name="DeleteButton3" type="Button" parent="CanvasLayer/MainLayout/SlotsContainer/CenterBox/CardsHBox/SlotCard3/Margin/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Delete"
+
+[node name="SlotsBackButton" type="Button" parent="CanvasLayer/MainLayout/SlotsContainer/CenterBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(180, 40)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Back"
+
+[node name="DeleteModal" type="Control" parent="CanvasLayer/MainLayout"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ModalBackdrop" type="ColorRect" parent="CanvasLayer/MainLayout/DeleteModal"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.6)
+
+[node name="Center" type="CenterContainer" parent="CanvasLayer/MainLayout/DeleteModal"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="PanelContainer" parent="CanvasLayer/MainLayout/DeleteModal/Center"]
+custom_minimum_size = Vector2(400, 200)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_modal")
+
+[node name="Margin" type="MarginContainer" parent="CanvasLayer/MainLayout/DeleteModal/Center/Panel"]
+layout_mode = 2
+
+[node name="VBox" type="VBoxContainer" parent="CanvasLayer/MainLayout/DeleteModal/Center/Panel/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 14
+alignment = 1
+
+[node name="Title" type="Label" parent="CanvasLayer/MainLayout/DeleteModal/Center/Panel/Margin/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.4, 0.35, 1)
+theme_override_font_sizes/font_size = 20
+text = "DELETE SAVE SLOT"
+horizontal_alignment = 1
+
+[node name="DeleteConfirmLabel" type="Label" parent="CanvasLayer/MainLayout/DeleteModal/Center/Panel/Margin/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Are you sure you want to delete this save slot?"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Spacer" type="Control" parent="CanvasLayer/MainLayout/DeleteModal/Center/Panel/Margin/VBox"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+
+[node name="ButtonsHBox" type="HBoxContainer" parent="CanvasLayer/MainLayout/DeleteModal/Center/Panel/Margin/VBox"]
+layout_mode = 2
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="DeleteConfirmButton" type="Button" parent="CanvasLayer/MainLayout/DeleteModal/Center/Panel/Margin/VBox/ButtonsHBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(140, 36)
+layout_mode = 2
+text = "Delete"
+
+[node name="DeleteCancelButton" type="Button" parent="CanvasLayer/MainLayout/DeleteModal/Center/Panel/Margin/VBox/ButtonsHBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(140, 36)
+layout_mode = 2
+text = "Cancel"
+
+[node name="OptionsContainer" type="Control" parent="CanvasLayer/MainLayout"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2

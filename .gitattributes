@@ -1,0 +1,13 @@
+* text=auto eol=lf
+
+*.png binary
+*.jpg binary
+*.exr binary
+*.glb binary
+*.fbx binary
+*.wav binary
+*.ogg binary
+*.ttf binary
+*.tres text eol=lf
+*.tscn text eol=lf
+*.gdshader text eol=lf

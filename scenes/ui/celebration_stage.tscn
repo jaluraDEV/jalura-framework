@@ -1,0 +1,65 @@
+[gd_scene format=3 uid="uid://cvuvclkiurdrw"]
+
+[ext_resource type="Script" uid="uid://db5h5ooyktp78" path="res://scripts/ui/celebration_stage.gd" id="1_jm7fo"]
+[ext_resource type="PackedScene" path="res://assets/chars/barnaby_neu.tscn" id="3_pke1w"]
+
+[sub_resource type="Environment" id="Environment_4df8k"]
+background_mode = 1
+background_color = Color(0.012, 0.015, 0.022, 1)
+background_energy_multiplier = 0.0
+ambient_light_source = 2
+ambient_light_energy = 0.0
+tonemap_mode = 3
+tonemap_exposure = 1.05
+sdfgi_enabled = true
+glow_enabled = true
+glow_intensity = 0.35
+glow_bloom = 0.15
+fog_enabled = true
+fog_light_color = Color(0, 0, 0, 1)
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.3299
+volumetric_fog_albedo = Color(0.12211766, 0.12767377, 0.18816361, 1)
+volumetric_fog_emission_energy = 0.0
+volumetric_fog_length = 20.0
+volumetric_fog_ambient_inject = 0.05
+
+[node name="CelebrationStage" type="Node3D" unique_id=536931719]
+script = ExtResource("1_jm7fo")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1810221796]
+environment = SubResource("Environment_4df8k")
+
+[node name="MainSpotlight" type="SpotLight3D" parent="." unique_id=1821788301]
+transform = Transform3D(1, 0, 0, 0, 0.14834048, 0.98893636, 0, -0.98893636, 0.14834048, 0, 4.5, 0.6)
+light_color = Color(1, 0.96, 0.88, 1)
+light_energy = 25.0
+light_indirect_energy = 0.658
+light_volumetric_fog_energy = 16.0
+light_bake_mode = 0
+shadow_enabled = true
+shadow_bias = 0.01
+shadow_blur = 1.5
+spot_range = 9.0
+spot_angle = 24.0
+spot_angle_attenuation = 1.2
+
+[node name="RimLight" type="DirectionalLight3D" parent="." unique_id=1702807369]
+transform = Transform3D(-1, 6.716004e-08, -5.5966698e-08, 0, 0.6401844, 0.76822126, 8.742278e-08, 0.76822126, -0.6401844, 0, 3, -2)
+light_color = Color(0.4, 0.65, 0.95, 1)
+light_energy = 1.2
+light_bake_mode = 0
+sky_mode = 1
+
+[node name="FillLight" type="OmniLight3D" parent="." unique_id=26054102]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 1.6)
+light_energy = 0.35
+light_bake_mode = 0
+omni_range = 3.0
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=995431483]
+transform = Transform3D(1, 9.077903e-09, -2.0425281e-08, 3.4627974e-09, 0.83985853, 0.5428054, 2.208188e-08, -0.5428054, 0.83985853, 0, 2.8627205, 2.676863)
+fov = 38.0
+
+[node name="Dancer" parent="." unique_id=1758101472 instance=ExtResource("3_pke1w")]
+transform = Transform3D(1.75, 0, 0, 0, 1.75, 0, 0, 0, 1.75, 0, 0, 0)

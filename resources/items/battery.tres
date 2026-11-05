@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="ItemData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/item_data.gd" id="1_enf20"]
+
+[resource]
+script = ExtResource("1_enf20")
+id = "battery"
+name = "Battery"
+description = "A fully charged power battery. Used as main currency and powers up gear!"
+category = 3
+max_stack = 999
+is_currency = true
+can_drop = false
