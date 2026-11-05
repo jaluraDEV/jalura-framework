@@ -48,7 +48,7 @@ scripts/
 ### Running the Demo
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-username/jalura_framework.git
+   git clone https://github.com/jaluraDEV/jalura-framework.git
    ```
 2. Open the project in Godot or run directly:
    ```bash
@@ -70,6 +70,19 @@ scripts/
 | **Quest Log** | `Q` | D-Pad Right |
 | **Equipment** | `U` | D-Pad Down |
 | **Pause Menu / Settings** | `Escape` | Start / Options |
+
+---
+
+## 📚 Documentation & Handbooks
+
+Comprehensive developer guides detailing the architecture, Inspector workflows, and component APIs:
+
+- [**🐾 Player Controller & Locomotion**](docs/player_controller.md) — 15-state platformer state machine, coyote time, jump buffering, stair step climbing, dynamic foot IK, glider, and grind rails.
+- [**🎥 Modular Camera System**](docs/camera_system.md) — Diorama rail tracking, 360° orbit, static cinematic rooms, and 1-click level designer presets.
+- [**📦 Modular World Object System**](docs/world_objects.md) — Hub-and-Spoke pattern for interactive props, 10 ready-to-use prefabs (chests, doors, levers, pushable blocks, NPCs), and event triggers.
+- [**📜 Quest System & Mission Engine**](docs/quest_system.md) — Data-driven QuestData resources, multi-step objectives, NPC dialogue linking, reactive HUD tracker, and celebration sequence.
+- [**🎒 Inventory, Items & Decoupled Currency**](docs/inventory_and_items.md) — 16-slot grid bag, item consumption/equipping, decoupled coin economy, safe pickup flow, and SaveManager serialization.
+- [**🗺️ World Map & Scene Navigation**](docs/world_map.md) — Fast-travel map graph, room transition triggers, automatic spawn point routing, and discovered location persistence.
 
 ---
 
