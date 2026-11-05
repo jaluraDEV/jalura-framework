@@ -2,7 +2,7 @@
 
 A modular, data-driven Godot 4 framework for 3D diorama action-adventures and platformers: third-person character controller, diorama camera rig, interactive world objects, inventory, quests, save system, and built-in level-design editor tools — cleanly decoupled from game-specific content.
 
-![Demo Level](docs/demo_screenshot.png)
+![Jalura Framework](docs/logo.png)
 
 ## Core Principles
 
