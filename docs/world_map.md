@@ -1,6 +1,6 @@
 # 🗺️ World Map & Scene Navigation
 
-The **Jalura Framework** uses a data-driven **symbolic scene registry and room routing architecture** ([`WorldMap`](file:///c:/Users/janlu/Desktop/projekte/jalura_framework/scripts/data/world_map.gd)).  
+The **Jalura Framework** uses a data-driven **symbolic scene registry and room routing architecture** ([`WorldMap`](../scripts/data/world_map.gd)).  
 Instead of hardcoding scene file paths inside doors and transitions, levels refer only to symbolic string IDs (e.g. `demo_level`, `bootskabine`), which the engine resolves dynamically via `res://resources/world/world_map.tres`.
 
 ---
@@ -8,21 +8,18 @@ Instead of hardcoding scene file paths inside doors and transitions, levels refe
 ## 1. Scene Topology
 
 ```mermaid
-graph LR
-    classDef interior fill:#2d3748,stroke:#4a5568,stroke-width:2px,color:#fff;
-    classDef overworld fill:#1a365d,stroke:#2b6cb0,stroke-width:2px,color:#fff;
+flowchart LR
+    cabin["Ship Cabin (bootskabine)<br/>Interior Diorama Showcase"]
+    harbor["Demo Harbor (demo_level)<br/>3D Platformer Playground and Rails"]
 
-    cabin["[1] Ship Cabin (bootskabine)<br/><i>Interior Diorama Showcase</i>"]:::interior
-    harbor["[2] Demo Harbor (demo_level)<br/><i>3D Platformer Playground & Rails</i>"]:::overworld
-
-    cabin <--> |"DoorExit [E] ➔ von_bootskabine<br/>CabinEntrance [E] ➔ von_hafen"| harbor
+    cabin <-->|"DoorExit [E] / CabinEntrance [E]"| harbor
 ```
 
 ---
 
 ## 2. Scene Registry (`resources/world/world_map.tres`)
 
-Scenes are registered as [`WorldMapEntry`](file:///c:/Users/janlu/Desktop/projekte/jalura_framework/scripts/data/world_map_entry.gd) resources:
+Scenes are registered as [`WorldMapEntry`](../scripts/data/world_map_entry.gd) resources:
 
 | Scene ID | Display Name | File Path | Scene Type | Registered Spawns |
 | :--- | :--- | :--- | :--- | :--- |
@@ -49,7 +46,7 @@ Scenes are registered as [`WorldMapEntry`](file:///c:/Users/janlu/Desktop/projek
 
 ## 4. Visual World Map Graph (Jalura Toolkit)
 
-Accessible directly in the Godot top dock under **Jalura Studio $\rightarrow$ World Map Graph**:
+Accessible directly in the Godot top dock under **Jalura Studio -> World Map Graph**:
 - **Automatic Graph Generation:** Scans all registered scenes for spawn points (cyan inputs) and transition exits (green/orange outputs).
 - **Persistent Layout:** Drag nodes freely across the canvas; positions save automatically to `resources/world/world_map_layout.json`.
 - **1-Click Scene Open:** Click **"Open in 3D"** on any graph card to load the scene directly into the Godot viewport.

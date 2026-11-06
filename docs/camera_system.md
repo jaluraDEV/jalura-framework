@@ -8,21 +8,21 @@ As a level designer, **you** configure exactly how the camera behaves in each sc
 ## 🏛️ System Architecture
 
 ```mermaid
-graph TD
-    subgraph Level Design & Inspector
-        Editor["Godot 3D Viewport & Inspector"] -->|camera_mode / bounds| DioCam["DioramaCamera3D Node"]
+flowchart TD
+    subgraph LevelDesign["Level Design and Inspector"]
+        Editor["Godot 3D Viewport and Inspector"] -->|camera_mode / bounds| DioCam["DioramaCamera3D Node"]
         Editor -->|3D Viewport Gizmos| Gizmo["CameraRailGizmoPlugin<br/>Cyan Rail + Amber Bounds Box"]
         DioCam -->|1-Click Presets| Presets["Harbor Pier / Cabin / Open Field / Fixed Room"]
     end
 
-    subgraph Runtime & Camera Management
+    subgraph Runtime["Runtime and Camera Management"]
         DioCam -->|register_diorama_camera| CM["CameraManager (Autoload)"]
-        Player["Player SpringArm3D"] -->|register_player| CM
+        PlayerNode["Player SpringArm3D"] -->|register_player| CM
         CM -->|Activates selected camera| Viewport["Godot Render Viewport"]
     end
 
-    subgraph Player Controls (Gameplay Only)
-        PlayerIn["Mouse & Right Gamepad Stick"] -->|Active only in FREE_360 mode| Player
+    subgraph Controls["Player Controls (Gameplay Only)"]
+        PlayerIn["Mouse and Right Gamepad Stick"] -->|Active only in FREE_360 mode| PlayerNode
     end
 ```
 
@@ -30,7 +30,7 @@ graph TD
 
 ## 🎬 The Three Inspector Camera Modes
 
-When dropping a [`DioramaCamera3D`](file:///c:/Users/janlu/Desktop/projekte/jalura_framework/scripts/camera/diorama_camera_3d.gd) into your scene, choose the mode under **🎬 Scene Camera Mode (Developer Default)**:
+When dropping a [`DioramaCamera3D`](../scripts/camera/diorama_camera_3d.gd) into your scene, choose the mode under **🎬 Scene Camera Mode (Developer Default)**:
 
 | Mode | Description | Typical Use Case |
 | :--- | :--- | :--- |
@@ -62,7 +62,7 @@ Under **⚡ 1-Click Presets for Developers** in the Inspector, apply standard ca
 
 ## 👁️ 3D Viewport Gizmos (Visual In-Engine Helpers)
 
-When selecting a `DioramaCamera3D` in the Godot 3D editor, the integrated **[`CameraRailGizmoPlugin`](file:///c:/Users/janlu/Desktop/projekte/jalura_framework/addons/jalura_toolkit/modules/viewport_gizmos/camera_rail_gizmo_plugin.gd)** renders colorful helper guides directly in the viewport:
+When selecting a `DioramaCamera3D` in the Godot 3D editor, the integrated **[`CameraRailGizmoPlugin`](../addons/jalura_toolkit/modules/viewport_gizmos/camera_rail_gizmo_plugin.gd)** renders colorful helper guides directly in the viewport:
 
 - **Cyan Rail (Line with tick marks):** Shows the exact horizontal traversal path of the camera from `max_pan_left` to `max_pan_right`.
 - **Amber / Yellow Boundary Box:** Visualizes the vertical height clamps (`max_pan_up` / `down`) and lateral limits.

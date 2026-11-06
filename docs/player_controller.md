@@ -1,8 +1,8 @@
 # 🐾 Player Controller & Locomotion
 
-> **Main Coordinator:** [`scenes/player.tscn`](file:///c:/Users/janlu/Desktop/projekte/jalura_framework/scenes/player.tscn) with [`scripts/player/player.gd`](file:///c:/Users/janlu/Desktop/projekte/jalura_framework/scripts/player/player.gd) (`class_name Player`)  
+> **Main Coordinator:** [`scenes/player.tscn`](../scenes/player.tscn) with [`scripts/player/player.gd`](../scripts/player/player.gd) (`class_name Player`)  
 > **Base Type:** `CharacterBody3D` (Godot 4 Jolt Physics)  
-> **Architecture:** Clean coordinator with 9 modularized sub-components in [`scripts/player/`](file:///c:/Users/janlu/Desktop/projekte/jalura_framework/scripts/player/)  
+> **Architecture:** Clean coordinator with 9 modularized sub-components in [`scripts/player/`](../scripts/player/)  
 > **Game Feel:** Responsive, tight platformer movement featuring 15 locomotion states, coyote time, jump buffering, stair step climbing, dynamic foot IK, and rail grinding.
 
 ---
@@ -12,29 +12,29 @@
 `player.gd` acts as the **central coordinator**: It captures inputs, drives the 15-state state machine, handles physics phases, and delegates specialized capabilities to 9 focused child components.
 
 ```mermaid
-graph TD
-    subgraph Coordinator ["player.gd (CharacterBody3D)"]
-        StateMach["State Machine : 15 States"]
-        PhysicsProc["_physics_process : 7 Phases"]
+flowchart TD
+    subgraph Coord["Coordinator: player.gd"]
+        StateMach["State Machine (15 States)"]
+        PhysicsProc["Physics Process (7 Phases)"]
         APIContract["Public API Contract"]
     end
 
-    subgraph Locomotion & Environment ["scripts/player/"]
-        StepClimber["PlayerStepClimber (Stairs & Ledges)"]
-        FootIK["PlayerFootIK (Dynamic Foot Planting)"]
-        WaterHazard["PlayerWaterHazard (Water & Shore Respawn)"]
+    subgraph Locomotion["Locomotion and Environment"]
+        StepClimber["PlayerStepClimber<br/>Stairs and Ledges"]
+        FootIK["PlayerFootIK<br/>Dynamic Foot Planting"]
+        WaterHazard["PlayerWaterHazard<br/>Water and Shore Respawn"]
     end
 
-    subgraph Visuals, Camera & Animation ["scripts/player/"]
-        CameraRig["PlayerCameraRig (SpringArm & Dither Fade)"]
-        Animator["PlayerAnimator (AnimationTree & States)"]
-        Equipment["PlayerEquipment (Flashlight, Glider, Shoes)"]
+    subgraph Visuals["Visuals, Camera and Animation"]
+        CameraRig["PlayerCameraRig<br/>SpringArm and Dither Fade"]
+        Animator["PlayerAnimator<br/>AnimationTree and States"]
+        Equipment["PlayerEquipment<br/>Flashlight, Glider, Shoes"]
     end
 
-    subgraph Feedback & World Interaction ["scripts/player/"]
-        Audio["PlayerAudio (3D-SFX, Steps, Grind Loop)"]
-        Effects["PlayerEffects (Particles, Dust, Squash & Stretch)"]
-        Interaction["PlayerInteraction (Proximity Scanner & Bump Push)"]
+    subgraph Feedback["Feedback and World Interaction"]
+        Audio["PlayerAudio<br/>3D Audio, Steps, Grind Loop"]
+        Effects["PlayerEffects<br/>Dust Particles, Squash and Stretch"]
+        Interaction["PlayerInteraction<br/>Proximity Scanner and Push"]
     end
 
     PhysicsProc --> StepClimber
@@ -52,15 +52,15 @@ graph TD
 
 | Component | Script | Type | Core Responsibility |
 | :--- | :--- | :---: | :--- |
-| **`PlayerStepClimber`** | [`scripts/player/player_step_climber.gd`](file:///c:/Users/janlu/Desktop/projekte/jalura_framework/scripts/player/player_step_climber.gd) | `Node` | Dual raycast stair probing and smooth step climbing up to 0.42 m without physics snagging. |
-| **`PlayerFootIK`** | [`scripts/player/player_foot_ik.gd`](file:///c:/Users/janlu/Desktop/projekte/jalura_framework/scripts/player/player_foot_ik.gd) | `Node` | Drives two `SkeletonIK3D` nodes on the character legs to plant feet onto slopes and stairs. |
-| **`PlayerWaterHazard`** | [`scripts/player/player_water_hazard.gd`](file:///c:/Users/janlu/Desktop/projekte/jalura_framework/scripts/player/player_water_hazard.gd) | `Node` | Monitors water boundaries, manages ocean surface level, and teleports player safely to shore. |
-| **`PlayerCameraRig`** | [`scripts/player/player_camera_rig.gd`](file:///c:/Users/janlu/Desktop/projekte/jalura_framework/scripts/player/player_camera_rig.gd) | `Node` | Manages `$CameraPivot`, SpringArm orbit, dynamic FOV, and proximity dither alpha fade. |
-| **`PlayerAudio`** | [`scripts/player/player_audio.gd`](file:///c:/Users/janlu/Desktop/projekte/jalura_framework/scripts/player/player_audio.gd) | `Node3D` | Positional 3D audio on `&"SFX"` bus; cadence-based footsteps (grass/wood/stone), jump calls, grind loop. |
-| **`PlayerEffects`** | [`scripts/player/player_effects.gd`](file:///c:/Users/janlu/Desktop/projekte/jalura_framework/scripts/player/player_effects.gd) | `Node3D` | 3D particle dust puffs (step, jump, land, skid, dash) and harmonic spring squash & stretch. |
-| **`PlayerAnimator`** | [`scripts/player/player_animator.gd`](file:///c:/Users/janlu/Desktop/projekte/jalura_framework/scripts/player/player_animator.gd) | `Node` | Animation playback, state-to-animation mapping, and directional blend spaces. |
-| **`PlayerEquipment`** | [`scripts/player/player_equipment.gd`](file:///c:/Users/janlu/Desktop/projekte/jalura_framework/scripts/player/player_equipment.gd) | `Node` | BoneAttachments for tools, glider visual attachment, and automatic inventory synchronization. |
-| **`PlayerInteraction`** | [`scripts/player/player_interaction.gd`](file:///c:/Users/janlu/Desktop/projekte/jalura_framework/scripts/player/player_interaction.gd) | `Node` | 2.8 m proximity prompt scanner, HUD prompt updates, bump-push interaction, and celebrations. |
+| **`PlayerStepClimber`** | [`scripts/player/player_step_climber.gd`](../scripts/player/player_step_climber.gd) | `Node` | Dual raycast stair probing and smooth step climbing up to 0.42 m without physics snagging. |
+| **`PlayerFootIK`** | [`scripts/player/player_foot_ik.gd`](../scripts/player/player_foot_ik.gd) | `Node` | Drives two `SkeletonIK3D` nodes on the character legs to plant feet onto slopes and stairs. |
+| **`PlayerWaterHazard`** | [`scripts/player/player_water_hazard.gd`](../scripts/player/player_water_hazard.gd) | `Node` | Monitors water boundaries, manages ocean surface level, and teleports player safely to shore. |
+| **`PlayerCameraRig`** | [`scripts/player/player_camera_rig.gd`](../scripts/player/player_camera_rig.gd) | `Node` | Manages `$CameraPivot`, SpringArm orbit, dynamic FOV, and proximity dither alpha fade. |
+| **`PlayerAudio`** | [`scripts/player/player_audio.gd`](../scripts/player/player_audio.gd) | `Node3D` | Positional 3D audio on `&"SFX"` bus; cadence-based footsteps (grass/wood/stone), jump calls, grind loop. |
+| **`PlayerEffects`** | [`scripts/player/player_effects.gd`](../scripts/player/player_effects.gd) | `Node3D` | 3D particle dust puffs (step, jump, land, skid, dash) and harmonic spring squash & stretch. |
+| **`PlayerAnimator`** | [`scripts/player/player_animator.gd`](../scripts/player/player_animator.gd) | `Node` | Animation playback, state-to-animation mapping, and directional blend spaces. |
+| **`PlayerEquipment`** | [`scripts/player/player_equipment.gd`](../scripts/player/player_equipment.gd) | `Node` | BoneAttachments for tools, glider visual attachment, and automatic inventory synchronization. |
+| **`PlayerInteraction`** | [`scripts/player/player_interaction.gd`](../scripts/player/player_interaction.gd) | `Node` | 2.8 m proximity prompt scanner, HUD prompt updates, bump-push interaction, and celebrations. |
 
 ---
 
@@ -119,7 +119,7 @@ The controller transitions cleanly across 15 states:
 
 ## 🛠️ 4. Inspector Tuning Guide
 
-All movement tuning parameters are exposed as `@export` variables in the Inspector on [`scenes/player.tscn`](file:///c:/Users/janlu/Desktop/projekte/jalura_framework/scenes/player.tscn):
+All movement tuning parameters are exposed as `@export` variables in the Inspector on [`scenes/player.tscn`](../scenes/player.tscn):
 
 ### 1. Motion & Jump
 - **Walk & Run Speed:** `walk_speed` (`5.0 m/s`), `run_speed` (`7.5 m/s`), `acceleration` (`14.0`), `friction` (`22.0`).

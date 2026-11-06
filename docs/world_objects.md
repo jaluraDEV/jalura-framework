@@ -10,16 +10,16 @@ This system replaces rigid, hardcoded object logic with an extensible building-b
 ### The Hub-and-Spoke Principle
 
 ```mermaid
-graph TD
-    Hub["InteractiveObject (Hub)<br/>• object_id & SaveManager persistence<br/>• Automatic 3D collision generation<br/>• Central prompt & interaction routing<br/>• Event bus & reaction triggers"]
+flowchart TD
+    Hub["InteractiveObject (Hub)<br/>- object_id and SaveManager persistence<br/>- Automatic 3D collision generation<br/>- Central prompt and interaction routing<br/>- Event bus and reaction triggers"]
     
     Hub --> B1["ObjectBehavior<br/>(e.g. Container, Door)"]
     Hub --> B2["ObjectBehavior<br/>(e.g. Switch, Pushable)"]
-    Hub --> B3["ObjectFeedback<br/>(Juice, Squash & Stretch, Audio, Particles)"]
+    Hub --> B3["ObjectFeedback<br/>(Juice, Squash and Stretch, Audio, Particles)"]
 ```
 
 1. **`InteractiveObject` (Hub):**
-   - The root node of any interactive entity ([`scripts/interaction/interactive_object.gd`](file:///c:/Users/janlu/Desktop/projekte/jalura_framework/scripts/interaction/interactive_object.gd)).
+   - The root node of any interactive entity ([`scripts/interaction/interactive_object.gd`](../scripts/interaction/interactive_object.gd)).
    - Manages a unique `object_id` for persistence via `SaveManager`. If left blank, automatically derives a clean, unique ID from the node name.
    - Manages collision modes (`collision_mode`).
    - Automatically detects all child `ObjectBehavior` nodes and routes interactions based on their `interaction_priority`.
@@ -29,7 +29,7 @@ graph TD
 3. **`ObjectFeedback` (Juice Component):**
    - Listens to hub events (`opened`, `toggled`, `shaken`, `pushed`, etc.) and plays elastic animations (squash & stretch), in-range scale hops, pitch-randomized 3D audio, and particle puffs.
 4. **Triggers & Actions (`ObjectTrigger` & `ReactionAction`):**
-   - Enables event-driven reactions without code (e.g., *"When switch is activated $\rightarrow$ open gate right"*, or *"When chest opened $\rightarrow$ trigger toast message"*).
+   - Enables event-driven reactions without code (e.g., *"When switch is activated -> open gate right"*, or *"When chest opened -> trigger toast message"*).
 
 ---
 
@@ -69,7 +69,7 @@ Without writing code, switches and pressure plates can remotely trigger other ob
 2. Expand the **Targets & Remote Control** group in the Inspector.
 3. Under **`Target Objects`**, click *Add Element* and pick the door (or target object) via NodePath.
 4. Set **`Target Method`** to the desired action:
-   - `"toggle"`: Toggles state (Open $\leftrightarrow$ Close).
+   - `"toggle"`: Toggles state (Open <-> Close).
    - `"open"` / `"activate"`: Opens the door or activates target.
    - `"close"` / `"deactivate"`: Closes the door on release.
 
@@ -114,10 +114,10 @@ The framework guarantees **zero item loss**:
 ## 5. Scene Transitions & Room Graph Recipes
 
 ### Recipe 1: Connecting Two Rooms
-1. In Scene A, place [`scenes/objects/obj_exit_door.tscn`](file:///c:/Users/janlu/Desktop/projekte/jalura_framework/scenes/objects/obj_exit_door.tscn).
+1. In Scene A, place [`scenes/objects/obj_exit_door.tscn`](../scenes/objects/obj_exit_door.tscn).
 2. Set **`Target Scene Id`** to `scene_b` and **`Target Spawn Id`** to `from_scene_a`.
-3. In Scene B, add a `Marker3D` with script [`scripts/world/spawn_point.gd`](file:///c:/Users/janlu/Desktop/projekte/jalura_framework/scripts/world/spawn_point.gd), setting its `spawn_id = "from_scene_a"`.
-4. Register both scenes in [`resources/world/world_map.tres`](file:///c:/Users/janlu/Desktop/projekte/jalura_framework/resources/world/world_map.tres).
+3. In Scene B, add a `Marker3D` with script [`scripts/world/spawn_point.gd`](../scripts/world/spawn_point.gd), setting its `spawn_id = "from_scene_a"`.
+4. Register both scenes in [`resources/world/world_map.tres`](../resources/world/world_map.tres).
 5. Open the **World Map Graph** in the Jalura Toolkit to inspect and verify the connection.
 
 ### Recipe 2: Key-Locked Door

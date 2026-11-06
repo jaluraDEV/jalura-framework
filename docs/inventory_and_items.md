@@ -1,25 +1,25 @@
 # 🎒 Inventory & Items
 
-The inventory system in the **Jalura Framework** is built on a strictly **data-driven architecture** with a clean distinction between physical backpack inventory items and global currency attributes. New items can be created with zero code simply by authoring an [`ItemData`](file:///c:/Users/janlu/Desktop/projekte/jalura_framework/scripts/data/item_data.gd) resource (`.tres`).
+The inventory system in the **Jalura Framework** is built on a strictly **data-driven architecture** with a clean distinction between physical backpack inventory items and global currency attributes. New items can be created with zero code simply by authoring an [`ItemData`](../scripts/data/item_data.gd) resource (`.tres`).
 
 ---
 
 ## 🏛️ System Architecture
 
 ```mermaid
-graph TD
-    subgraph Data Layer
-        tres[".tres ItemData Resources<br/>(res://resources/items/)"]
+flowchart TD
+    subgraph DataLayer["Data Layer"]
+        tres[".tres ItemData Resources<br/>res://resources/items/"]
     end
 
-    subgraph Logic Layer
+    subgraph LogicLayer["Logic Layer"]
         IM["InventoryManager (Autoload Singleton)<br/>scripts/core/inventory_manager.gd"]
     end
 
-    subgraph Presentation & UI Layer
-        HUD["HUD / Currency Display<br/>(Energy & Coins Counters)"]
+    subgraph UILayer["Presentation and UI Layer"]
+        HUD["HUD / Currency Display<br/>Energy and Coins Counters"]
         BagUI["InventoryMenu (16 Slots Grid)<br/>scenes/ui/inventory_menu.tscn"]
-        World["3D Pickups in World<br/>(PickableItem / Interactable)"]
+        World["3D Pickups in World<br/>PickableItem / Interactable"]
     end
 
     tres -->|Scanned automatically at startup| IM
@@ -41,7 +41,7 @@ A central design pillar of the Jalura Framework is the **decoupling of currencie
 | Feature | Physical Backpack Items (Apples, Tools, Keys) | Currencies (Energy / Coins) |
 | :--- | :--- | :--- |
 | **Category** | `CONSUMABLE`, `KEY_ITEM`, `TOOL`, `COLLECTIBLE` | `CURRENCY` (`is_currency = true`) |
-| **UI Location** | 16-Slot Grid in [`InventoryMenu`](file:///c:/Users/janlu/Desktop/projekte/jalura_framework/scenes/ui/inventory_menu.tscn) (`[I]`) | Persistent HUD counter on screen |
+| **UI Location** | 16-Slot Grid in [`InventoryMenu`](../scenes/ui/inventory_menu.tscn) (`[I]`) | Persistent HUD counter on screen |
 | **Slot Consumption** | Consumes 1 of 16 slots (up to `max_stack`) | **0 Slots!** Never takes up backpack space |
 | **Max Capacity** | Bound by `max_slots` (Default: 16) | Up to `max_stack` (Default: 999) |
 | **Full Inventory Behavior** | Rejected (`can_add_item() == false`) | **Always collected**, even when all 16 slots are full |
@@ -63,13 +63,13 @@ sequenceDiagram
     participant IM as InventoryManager
     participant HUD as HUD Notification
 
-    Player->>WorldItem: Touches Pickup / Interacts
+    Player->>WorldItem: Touches Pickup or Interacts
     WorldItem->>IM: can_add_item("coin", 1)
     alt Inventory has free slot or stack space
         IM-->>WorldItem: true
         WorldItem->>IM: add_item("coin", 1)
         IM-->>HUD: emit item_added
-        WorldItem->>Player: Vanishes with juice & pickup sound
+        WorldItem->>Player: Vanishes with juice and pickup sound
     else Inventory full (16/16 slots occupied)
         IM-->>WorldItem: false
         WorldItem-->>HUD: show_toast("🎒", "INVENTORY FULL", "No room for item!", Red)
@@ -83,7 +83,7 @@ sequenceDiagram
 
 ### Method A: In FileSystem (Manual)
 1. In the Godot FileSystem dock, right-click `res://resources/items/`.
-2. Select **New Resource...** $\rightarrow$ Search for **ItemData**.
+2. Select **New Resource...** -> Search for **ItemData**.
 3. Save as `gem_ruby.tres`.
 4. Configure in Inspector:
    - **ID**: `gem_ruby` *(if left blank, uses filename as ID)*
@@ -94,7 +94,7 @@ sequenceDiagram
    - **Can Drop**: `true`
 
 ### Method B: Using Jalura Toolkit (1-Click Item Converter)
-1. In the top bar, open **Jalura Studio $\rightarrow$ Tools**.
+1. In the top bar, open **Jalura Studio -> Tools**.
 2. Select **1-Click Item Converter**.
 3. Select any 3D model file (`.glb`). The tool automatically generates:
    - The `.tres` `ItemData` resource.

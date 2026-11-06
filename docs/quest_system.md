@@ -2,7 +2,7 @@
 
 The quest system in the **Jalura Framework** is designed for production adventure gameplay: Fully **modular, data-driven, signal-based**, and tightly integrated with dialogues, inventory, and celebration staging.
 
-Every quest exists as an independent [`QuestData`](file:///c:/Users/janlu/Desktop/projekte/jalura_framework/scripts/data/quest_data.gd) resource (`.tres`) in `res://resources/quests/`. Quests can be chained, gated by prerequisites, and managed visually through the in-engine **Jalura Quest Studio**.
+Every quest exists as an independent [`QuestData`](../scripts/data/quest_data.gd) resource (`.tres`) in `res://resources/quests/`. Quests can be chained, gated by prerequisites, and managed visually through the in-engine **Jalura Quest Studio**.
 
 ---
 
@@ -20,7 +20,7 @@ stateDiagram-v2
         are_prerequisites_met()
     end note
 
-    ACTIVE --> ACTIVE: notify_item_collected() / notify_location_reached() / ...
+    ACTIVE --> ACTIVE: notify_item_collected() / notify_location_reached()
     note right of ACTIVE
         Updates objectives:
         quest_objective_updated
@@ -29,13 +29,13 @@ stateDiagram-v2
     ACTIVE --> READY_TO_TURN_IN: All mandatory objectives complete!
     note right of READY_TO_TURN_IN
         HUD Toast:
-        "READY TO TURN IN"
+        READY TO TURN IN
     end note
 
     READY_TO_TURN_IN --> COMPLETED: complete_quest() / Turn in at NPC
     note right of COMPLETED
         Consume items (optional)
-        Grant rewards (coins/energy/items)
+        Grant rewards
         Play milestone celebration
         Unlock chained follow-up quests
     end note
@@ -55,7 +55,7 @@ stateDiagram-v2
 
 The system supports linear and non-linear tasks. When `sequential_objectives = true`, only the current objective in the list is active at any time.
 
-All objectives derive from [`QuestObjective`](file:///c:/Users/janlu/Desktop/projekte/jalura_framework/scripts/data/quest_objective.gd):
+All objectives derive from [`QuestObjective`](../scripts/data/quest_objective.gd):
 
 | Objective Class | Purpose | Trigger in QuestManager |
 | :--- | :--- | :--- |
@@ -72,16 +72,16 @@ All objectives derive from [`QuestObjective`](file:///c:/Users/janlu/Desktop/pro
 
 ## 💬 4-Phase Script Dialogue
 
-NPC dialogues are directly integrated into quests. An NPC query delegates directly to [`QuestManager.get_npc_dialogue(npc_id)`](file:///c:/Users/janlu/Desktop/projekte/jalura_framework/scripts/core/quest_manager.gd):
+NPC dialogues are directly integrated into quests. An NPC query delegates directly to [`QuestManager.get_npc_dialogue(npc_id)`](../scripts/core/quest_manager.gd):
 
 ```mermaid
-graph TD
+flowchart TD
     NPC["NPC Interaction via QuestGiver"] --> Check{"Which quest is relevant?"}
-    Check -->|1. Quest ready to turn in| TurnIn["turn_in_dialogue<br/>(Rewards & Completion)"]
-    Check -->|2. Quest active| Reminder["reminder_dialogue<br/>(Reminder of task)"]
-    Check -->|3. Quest available| Offer["offer_dialogue<br/>(Offer the quest)"]
-    Check -->|4. Completed previously| After["after_dialogue<br/>(Follow-up / thank you)"]
-    Check -->|No quests active| Idle["idle_dialogue<br/>('Nice day today...')"]
+    Check -->|1. Quest ready to turn in| TurnIn["turn_in_dialogue<br/>Rewards and Completion"]
+    Check -->|2. Quest active| Reminder["reminder_dialogue<br/>Reminder of task"]
+    Check -->|3. Quest available| Offer["offer_dialogue<br/>Offer the quest"]
+    Check -->|4. Completed previously| After["after_dialogue<br/>Follow-up and thank you"]
+    Check -->|No quests active| Idle["idle_dialogue<br/>Nice day today..."]
 ```
 
 Each string line in the array corresponds to one speech bubble or dialogue card in the HUD.
@@ -121,7 +121,7 @@ When a follow-up quest has `auto_start = true`, it activates seamlessly the mome
 
 ## 🛠️ Jalura Quest Studio (Editor Tool)
 
-Available in the Godot top dock under **Jalura Studio $\rightarrow$ Quest Studio**:
+Available in the Godot top dock under **Jalura Studio -> Quest Studio**:
 - **Dependency Graph:** Visual node graph displaying all quests in `resources/quests/` and prerequisite links.
 - **Quest Editor:** Form view for editing title, ID, categories, NPC links, sequential checkboxes, objectives, and dialogues.
 - **Quick Wizard:** 1-click dialog to scaffold new fetch, messenger, exploration, or interaction quests.
