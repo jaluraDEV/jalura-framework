@@ -2,21 +2,22 @@
 .godot/
 .import/
 *.translation
+docs/*.import
 
 # Export
 export.cfg
 
-# Temporäre / generierte Dateien
+# Temporary / Generated files
 *.log
 *.tmp
 *.bak
 *.unwrap_cache
 
-# Altprojekt-Archiv (bewusst nicht versioniert)
+# Local archive & scratch (unversioned)
 _legacy/
 junk/
 
-# Betriebssystem
+# Operating System files
 Thumbs.db
 desktop.ini
 .DS_Store

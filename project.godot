@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Jalura Framework"
-config/description="Modulares Godot-4-Framework für Diorama-Adventures."
+config/description="Modular Godot 4 framework for 3D diorama action-adventures and platformers."
 run/main_scene="res://scenes/ui/title_screen.tscn"
 config/features=PackedStringArray("4.7", "Forward Plus")
 config/icon="res://icon.svg"

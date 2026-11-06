@@ -2,7 +2,7 @@ class_name PlayerAudio
 extends Node3D
 
 ## PlayerAudio
-## Modular audio manager for Barnaby.
+## Modular audio manager for the player controller.
 ## Handles footsteps (surface-aware), voice/action SFX, jump/landing audio, and looping rail grind sound.
 ## Sounds are exposed as @export (AudioStream) properties with default asset fallbacks.
 

@@ -6,10 +6,14 @@
 
 A modular, data-driven Godot 4 framework for 3D diorama action-adventures and platformers: third-person character controller, diorama camera rig, interactive world objects, inventory, quests, save system, and built-in level-design editor tools — cleanly decoupled from game-specific content.
 
+<p align="center">
+  <img src="docs/screenshot.png" alt="Jalura Framework Demo Level" width="850">
+</p>
+
 ## Core Principles
 
 - **Data-Driven:** Behavior is configured via Resources and Inspector properties, not rigid class inheritance.
-- **Clean Rights & Provenance:** Zero copyrighted assets. All models, textures, shaders, and sounds are original or permissively licensed.
+- **Clean Rights & Provenance:** Zero copyrighted assets. All models, textures, and shaders are original or permissively licensed.
 - **Modular Architecture:** Every module can be imported or used independently and instantiates cleanly in headless testing.
 - **Production-Ready Tools:** Includes built-in editor docks for rapid level-design stamping, quest graphing, world map visualization, and automatic collision generation.
 
@@ -122,5 +126,6 @@ godot --headless --path . -s res://tests/runtime_ui.gd
 
 ## License & Credits
 
-- Code: MIT License.
-- Assets: All models, shaders, textures, and audio are original or permissively licensed and safe for open-source use.
+- **Code:** MIT License (see [LICENSE](LICENSE)).
+- **Assets & Models:** Original low-poly showcase assets created for this framework. See [CREDITS.md](CREDITS.md) for detailed asset provenance and licenses.
+- **Audio Subsystem:** Fully configured with 3D audio buses, surface awareness, and cadence timers. Sound slots are pre-wired as empty placeholders so you can plug in your own sound effects without repository bloat.

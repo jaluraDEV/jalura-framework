@@ -20,7 +20,7 @@ enum State {
 	RAIL_GRIND
 }
 
-@export_group("Motion & Feel (Platformer Project Style)")
+@export_group("Motion & Feel")
 @export var walk_speed: float = 5.0             ## Base top speed for walk/jog
 @export var run_speed: float = 7.5              ## Sprint top speed
 @export var acceleration: float = 38.0          ## Ground acceleration rate (Snappy responsive grip!)
